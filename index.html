@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>السيرة الذاتية - Ahmed Hussien Ali</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app" class="theme-light">
+        <header class="hero" id="top">
+            <div class="container hero-content fade-in" id="heroBlock">
+                <div class="hero-image">
+                    <img id="profileImage" src="assets/images/profile.jpg" alt="صورة شخصية" />
+                </div>
+                <div class="hero-text">
+                    <h1 id="profileName">Ahmed Hussien Ali</h1>
+                    <h2 id="profileTitle">Job Title</h2>
+                    <p class="summary" id="profileSummary">نبذة مختصرة عنك ستظهر هنا.</p>
+                    <p class="location" id="profileLocation">City, Country</p>
+                    <div class="hero-actions">
+                        <a href="CV%20Ahmed%20Hussien%20Ali.pdf" class="btn primary" id="btnDownloadCv" download>تحميل السيرة الذاتية PDF</a>
+                        <a href="#contact" class="btn outline" id="btnHeroContact">تواصل معي</a>
+                    </div>
+                </div>
+                <button id="themeToggle" class="theme-toggle" aria-label="تبديل وضع الألوان">
+                    <span class="theme-icon theme-icon-sun">☀</span>
+                    <span class="theme-icon theme-icon-moon">🌙</span>
+                </button>
+                <button id="langToggle" class="lang-toggle" type="button" aria-label="تبديل اللغة">
+                    AR
+                </button>
+            </div>
+        </header>
+
+        <nav class="main-nav">
+            <div class="container nav-inner">
+                <a href="#top" class="logo" id="navLogo">السيرة الذاتية</a>
+                <ul class="nav-links">
+                    <li><a href="#experience" id="navExperience">الخبرات</a></li>
+                    <li><a href="#education" id="navEducation">التعليم</a></li>
+                    <li><a href="#skills" id="navSkills">المهارات</a></li>
+                    <li><a href="#projects" id="navProjects">المشاريع</a></li>
+                    <li><a href="#contact" id="navContact">التواصل</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main>
+            <section id="experience" class="section">
+                <div class="container fade-in">
+                    <h3 class="section-title" id="titleExperience">الخبرات العملية</h3>
+                    <div id="experienceContainer"></div>
+                </div>
+            </section>
+
+            <section id="education" class="section alt">
+                <div class="container fade-in">
+                    <h3 class="section-title" id="titleEducation">التعليم</h3>
+                    <div id="educationContainer"></div>
+                </div>
+            </section>
+
+            <section id="skills" class="section">
+                <div class="container fade-in">
+                    <h3 class="section-title" id="titleSkills">المهارات</h3>
+                    <div id="skillsContainer" class="skills-grid"></div>
+                </div>
+            </section>
+
+            <section id="projects" class="section alt">
+                <div class="container fade-in">
+                    <h3 class="section-title" id="titleProjects">المشاريع والأعمال</h3>
+                    <div id="projectsContainer" class="projects-grid"></div>
+                </div>
+            </section>
+
+            <section id="contact" class="section">
+                <div class="container fade-in">
+                    <h3 class="section-title" id="titleContact">التواصل</h3>
+                    <div class="contact-layout">
+                        <form class="contact-form" onsubmit="return handleContactSubmit(event)">
+                            <div class="form-group">
+                                <label for="name" id="labelName">الاسم</label>
+                                <input type="text" id="name" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="email" id="labelEmail">البريد الإلكتروني</label>
+                                <input type="email" id="email" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="message" id="labelMessage">الرسالة</label>
+                                <textarea id="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn primary full" id="btnSend">إرسال</button>
+                            <p id="contactStatus" class="status"></p>
+                        </form>
+
+                        <div class="contact-info">
+                            <ul id="contactsList"></ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p id="footerText">© <span id="footerYear"></span> Ahmed Hussien Ali - جميع الحقوق محفوظة.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/js/static-data.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

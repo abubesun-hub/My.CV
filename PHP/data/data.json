@@ -1,0 +1,23 @@
+{
+  "profile": {
+    "name": "Ahmed Hussien Ali",
+    "title": "Your Job Title Here",
+    "summary": "اكتب هنا نبذة مختصرة احترافية عن نفسك وخبراتك المهنية.",
+    "location": "City, Country",
+    "profileImage": "assets/images/profile.jpg"
+  },
+  "experience": [],
+  "education": [],
+  "skills": [],
+  "projects": [],
+  "contacts": {
+    "email": "",
+    "phone": "",
+    "whatsapp": "",
+    "linkedin": "",
+    "github": ""
+  },
+  "settings": {
+    "defaultTheme": "light"
+  }
+}

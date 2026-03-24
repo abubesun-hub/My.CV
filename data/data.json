@@ -1,0 +1,136 @@
+{
+  "profile": {
+    "name": "أحمد حسين علي",
+    "title": "محلل أعمال وأنظمة SAP",
+    "summary": "محترف في تحليل الأعمال وأنظمة تخطيط موارد المؤسسات (ERP)، بخبرة في تصميم وتحسين العمليات التجارية وربطها بالأنظمة الرقمية لضمان كفاءة أعلى ودقة في التقارير واتخاذ القرار.",
+    "location": "القاهرة، مصر",
+    "name_en": "Ahmed Hussien Ali",
+    "title_en": "SAP & Business Analyst",
+    "summary_en": "Professional business and ERP analyst with experience in designing and improving business processes, aligning them with digital systems to increase efficiency and provide accurate reporting for better decision making.",
+    "location_en": "Cairo, Egypt",
+    "profileImage": "assets/images/profile.jpg"
+  },
+  "experience": [
+    {
+      "role": "محلل أعمال",
+      "company": "ABC Solutions",
+      "period": "2022 - حتى الآن",
+      "description": "تحليل متطلبات العملاء، إعداد وثائق تحليل الأعمال (BRD)، وتنسيق تنفيذ حلول رقمية تدعم العمليات المالية واللوجستية. العمل مع فرق التطوير لضمان مطابقة الحلول لاحتياجات أصحاب المصلحة.",
+      "period_en": "2022 - Present",
+      "role_en": "Business Analyst",
+      "company_en": "ABC Solutions",
+      "description_en": "Analyse customer requirements, prepare Business Requirements Documents (BRD), and coordinate the implementation of digital solutions that support financial and logistics operations, working closely with development teams and stakeholders."
+    },
+    {
+      "role": "مستخدم رئيسي لنظام SAP",
+      "company": "XYZ Manufacturing",
+      "period": "2019 - 2022",
+      "description": "العمل على وحدات المشتريات والمخزون في نظام SAP، تدريب المستخدمين النهائيين، إعداد تقارير دورية عن الأداء التشغيلي، والمشاركة في تحسين دورات العمل والإجراءات الداخلية.",
+      "period_en": "2019 - 2022",
+      "role_en": "SAP End User / Key User",
+      "company_en": "XYZ Manufacturing",
+      "description_en": "Worked on purchasing and inventory modules in SAP, trained end users, prepared regular operational performance reports, and contributed to improving workflows and internal procedures."
+    },
+    {
+      "role": "مسؤول إداري",
+      "company": "Global Services Co.",
+      "period": "2016 - 2019",
+      "description": "إدارة العمليات الإدارية اليومية، تنسيق المراسلات والتقارير، دعم فريق الإدارة في متابعة مؤشرات الأداء والالتزام بسياسات الشركة.",
+      "period_en": "2016 - 2019",
+      "role_en": "Administrative Officer",
+      "company_en": "Global Services Co.",
+      "description_en": "Managed daily administrative operations, coordinated correspondence and reporting, and supported the management team in monitoring KPIs and compliance with company policies."
+    }
+  ],
+  "education": [
+    {
+      "degree": "بكالوريوس تجارة",
+      "institution": "كلية التجارة - جامعة القاهرة",
+      "period": "2011 - 2015",
+      "description": "تخصص محاسبة وإدارة أعمال، دراسة مبادئ المالية، المحاسبة، الاقتصاد، والإدارة، مع مشاريع تطبيقية على تحليل البيانات المالية.",
+      "degree_en": "Bachelor of Commerce",
+      "institution_en": "Faculty of Commerce, Cairo University",
+      "period_en": "2011 - 2015",
+      "description_en": "Major in Accounting and Business Administration, covering finance, accounting, economics and management with applied projects in financial data analysis."
+    },
+    {
+      "degree": "دورات في SAP وتحليل الأعمال",
+      "institution": "منصات تعليمية ومراكز تدريب",
+      "period": "2018 - 2023",
+      "description": "حضور دورات تدريبية في أساسيات SAP، تحليل الأعمال (Business Analysis)، وكتابة المتطلبات (Requirements Engineering) باستخدام أفضل الممارسات العالمية.",
+      "degree_en": "Courses in SAP & Business Analysis",
+      "institution_en": "Online Platforms & Training Centers",
+      "period_en": "2018 - 2023",
+      "description_en": "Completed several courses on SAP fundamentals, Business Analysis, and Requirements Engineering following international best practices."
+    }
+  ],
+  "skills": [
+    { "name": "تحليل الأعمال", "name_en": "Business Analysis", "level": 90 },
+    {
+      "name": "أساسيات SAP (وحدات MM/SD)",
+      "name_en": "SAP (MM / SD basics)",
+      "level": 80
+    },
+    {
+      "name": "رسم وتحسين العمليات",
+      "name_en": "Process Mapping & Improvement",
+      "level": 85
+    },
+    {
+      "name": "إعداد التقارير باستخدام Excel",
+      "name_en": "Microsoft Excel & Reporting",
+      "level": 90
+    },
+    {
+      "name": "توثيق المتطلبات (BRD / SRS)",
+      "name_en": "Documentation (BRD / SRS)",
+      "level": 80
+    },
+    {
+      "name": "مهارات الاتصال والعرض",
+      "name_en": "Communication & Presentation",
+      "level": 85
+    },
+    {
+      "name": "حل المشكلات",
+      "name_en": "Problem Solving",
+      "level": 88
+    }
+  ],
+  "projects": [
+    {
+      "title": "رقمنة دورة طلبات الشراء",
+      "description": "إعادة تصميم دورة طلبات الشراء من نموذج ورقي إلى نموذج رقمي متكامل، مع تتبع الموافقات وتقارير حالة الطلبات، مما ساهم في تقليل زمن الدورة وتحسين الشفافية.",
+      "title_en": "Digitalization of Purchase Request Cycle",
+      "description_en": "Redesign of the purchase request cycle from a paper-based model to a fully digital workflow with approval tracking and status reports, reducing cycle time and improving transparency.",
+      "link": "https://github.com/your-account/purchase-cycle-demo",
+      "image": "assets/images/project-1.jpg"
+    },
+    {
+      "title": "لوحة مؤشرات الأداء التشغيلي (KPI Dashboard)",
+      "description": "تصميم لوحة مؤشرات أداء رئيسية (KPI Dashboard) على Excel/Power BI لمتابعة مؤشرات المشتريات والمخزون والخدمة، مع تقارير تفاعلية تساعد الإدارة في اتخاذ القرار.",
+      "title_en": "KPI Dashboard for Operations",
+      "description_en": "Designed a main KPI dashboard using Excel/Power BI to track purchasing, inventory and service indicators with interactive reports that support management decisions.",
+      "link": "https://github.com/your-account/kpi-dashboard",
+      "image": "assets/images/project-2.jpg"
+    },
+    {
+      "title": "مكتبة توثيق إجراءات العمل (SOPs)",
+      "description": "إعداد مكتبة متكاملة لإجراءات العمل (SOPs) ورسوم تدفق العمليات (Process Flowcharts) لأقسام متعددة داخل الشركة، مما سهّل تدريب الموظفين الجدد وتوحيد طريقة العمل.",
+      "title_en": "Process Documentation Library",
+      "description_en": "Created a complete library of Standard Operating Procedures (SOPs) and process flowcharts for multiple departments, which simplified onboarding and unified the way of working.",
+      "link": "",
+      "image": "assets/images/project-3.jpg"
+    }
+  ],
+  "contacts": {
+    "email": "ahmed.hussien@example.com",
+    "phone": "+2010XXXXXXX",
+    "whatsapp": "2010XXXXXXX",
+    "linkedin": "https://www.linkedin.com/in/ahmed-hussien-ali",
+    "github": "https://github.com/your-account"
+  },
+  "settings": {
+    "defaultTheme": "light"
+  }
+}
