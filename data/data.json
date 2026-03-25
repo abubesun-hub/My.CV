@@ -1,7 +1,7 @@
 {
   "profile": {
     "name": "أحمد حسين علي",
-    "title": " محلل أنظمة ومطور تطبيقات",
+    "title": "محلل أنظمة ومطور تطبيقات",
     "summary": "محترف في تحليل الأعمال وأنظمة تخطيط موارد المؤسسات (ERP)، بخبرة في تصميم وتحسين العمليات التجارية وربطها بالأنظمة الرقمية لضمان كفاءة أعلى ودقة في التقارير واتخاذ القرار.\n\nمحترف  ومتعدد المهارات يتمتع بخبرة مزدوجة ومتميزة في تكنولوجيا المعلومات وتدريس اللغة الإنجليزية. \nيمتلك خبرة واسعة تمتد لسنوات في الدعم الفني، وتطوير البرمجيات، وصيانة أجهزة الحاسوب، والتعليم الأكاديمي.",
     "location": "العراق، الرمادي",
     "name_en": "Ahmed Hussien Ali",
@@ -12,24 +12,24 @@
   },
   "experience": [
     {
-      "role": "محلل أعمال",
-      "company": "ABC Solutions",
-      "period": "2011 - حتى الآن",
-      "description": "تحليل متطلبات العملاء، إعداد وثائق تحليل الأعمال (BRD)، وتنسيق تنفيذ حلول رقمية تدعم العمليات المالية واللوجستية. العمل مع فرق التطوير لضمان مطابقة الحلول لاحتياجات أصحاب المصلحة.",
-      "period_en": "2011 - Present",
-      "role_en": "Business Analyst",
-      "company_en": "ABC Solutions",
-      "description_en": "Analyse customer requirements, prepare Business Requirements Documents (BRD), and coordinate the implementation of digital solutions that support financial and logistics operations, working closely with development teams and stakeholders."
-    },
-    {
       "role": "مستخدم رئيسي لنظام SAP",
       "company": "مكتب ايتكـ (I.TECH)",
-      "period": "2016 - 2025",
+      "period": "2022 - 2024",
       "description": "العمل على وحدات المشتريات والمخزون في نظام SAP، تدريب المستخدمين النهائيين، إعداد تقارير دورية عن الأداء التشغيلي، والمشاركة في تحسين دورات العمل والإجراءات الداخلية.",
-      "period_en": "2016 - 2022",
+      "period_en": "2022 - 2024",
       "role_en": "SAP End User / Key User",
       "company_en": "I-TECH",
       "description_en": "Worked on purchasing and inventory modules in SAP, trained end users, prepared regular operational performance reports, and contributed to improving workflows and internal procedures."
+    },
+    {
+      "role": "مبرمج",
+      "company": "مكتب ايتكـ (I.TECH)",
+      "period": "2016 - حتى الان",
+      "description": "سجل حافل في تطوير البرمجيات المخصصة، وإطلاق منصات الويب التجارية، وتصميم المناهج التعليمية الشاملة. يتمتع بمهارات قيادية وقدرة عالية على إدارة المشاريع التقنية وفِرق العمل",
+      "period_en": "2016 - Present",
+      "role_en": "programmer",
+      "company_en": "I-TECH",
+      "description_en": "A proven track record in developing custom software, launching commercial web platforms, and designing comprehensive educational curricula. Possesses strong leadership skills and a proven ability to manage technical projects and teams."
     },
     {
       "role": "مسؤول إداري - ادارة الحسابات",
@@ -40,16 +40,6 @@
       "role_en": "Administrative Officer - Accounts Management",
       "company_en": "AL SHERAA AL 'ABYAD AL EALI COMPANY",
       "description_en": "Managed daily administrative operations, coordinated correspondence and reporting, and supported the management team in monitoring KPIs and compliance with company policies.\n\nCompany Finance Department Management"
-    },
-    {
-      "role": "مبرمج",
-      "company": "مكتب ايتكـ (I.TECH)",
-      "period": "2016 - حتى الان",
-      "description": "سجل حافل في تطوير البرمجيات المخصصة، وإطلاق منصات الويب التجارية، وتصميم المناهج التعليمية الشاملة. يتمتع بمهارات قيادية وقدرة عالية على إدارة المشاريع التقنية وفِرق العمل",
-      "role_en": "programmer",
-      "company_en": "I-TECH",
-      "period_en": "2016 - Present",
-      "description_en": "A proven track record in developing custom software, launching commercial web platforms, and designing comprehensive educational curricula. Possesses strong leadership skills and a proven ability to manage technical projects and teams."
     },
     {
       "role": "مؤسس ومدير تنفيذي",
@@ -82,6 +72,16 @@
       "description_en": "-Overseeing technical and scientific projects.\n\n-Managing IT infrastructure, hardware/software maintenance, and providing technical support."
     },
     {
+      "role": "محلل أعمال",
+      "company": "ABC Solutions",
+      "period": "2011 - حتى الآن",
+      "description": "تحليل متطلبات العملاء، إعداد وثائق تحليل الأعمال (BRD)، وتنسيق تنفيذ حلول رقمية تدعم العمليات المالية واللوجستية. العمل مع فرق التطوير لضمان مطابقة الحلول لاحتياجات أصحاب المصلحة.",
+      "role_en": "Business Analyst",
+      "company_en": "ABC Solutions",
+      "period_en": "2011 - Present",
+      "description_en": "Analyse customer requirements, prepare Business Requirements Documents (BRD), and coordinate the implementation of digital solutions that support financial and logistics operations, working closely with development teams and stakeholders."
+    },
+    {
       "role": "مسؤول تكنولوجيا المعلومات (I.T)",
       "company": "منظمة الإغاثة الدولية (Relief International) - برنامج ICCM",
       "period": "2009-2010",
@@ -109,6 +109,16 @@
       "role_en": "Information Technology (I.T)",
       "company_en": "Islamic Bank, Ramadi Branch.",
       "period_en": "2012-2012",
+      "description_en": "Information Technology (I.T)"
+    },
+    {
+      "role": "مسؤول تكنولوجيا المعلومات (I.T)",
+      "company": "مصرف الهدى، فرع الرمادي.",
+      "period": "2012-2016",
+      "description": "مسؤول تكنولوجيا المعلومات (I.T)",
+      "role_en": "Information Technology (I.T)",
+      "company_en": "Huda Bank, Ramadi Branch.",
+      "period_en": "2012-2016",
       "description_en": "Information Technology (I.T)"
     }
   ],
