@@ -219,14 +219,38 @@
       "description_en": "Designed and launched a dedicated web platform for publishing tenders for contractors in Iraq.",
       "link": "https://abubesun-hub.github.io/I.tech/tenders-new.html",
       "image": "assets/images/project-3.jpg"
+    },
+    {
+      "title": "الأنظمة المحاسبية",
+      "description": "تصميم وتطوير عدة برامج محاسبية متخصصة باستخدام (Microsoft Visual Basic)، بما في ذلك أنظمة مصممة لإدارة الاستثمارات وعمليات البيع الآجل والنقدي.",
+      "title_en": "Accounting Systems",
+      "description_en": "Designed multiple specialized accounting programs using Microsoft Visual Basic , including systems tailored for investments and credit/cash sales.",
+      "link": "https://abubesun-hub.github.io/I.tech/program.html?id=mohasib-tech-%D9%85%D8%AD%D8%A7%D8%B3%D8%A8-%D8%AA%D9%83-1769018765500",
+      "image": "assets/images/project-1.jpg"
+    },
+    {
+      "title": "جدولي",
+      "description": "تنظيم وإدارة الجداول المدرسية",
+      "title_en": "Jadwaly",
+      "description_en": "Organizing and managing school timetables",
+      "link": "https://abubesun-hub.github.io/I.tech/program.html?id=%D8%AC%D8%AF%D9%88%D9%84%D9%8A-%40-jadwaly-1769008814377",
+      "image": "https://raw.githubusercontent.com/abubesun-hub/mypic/refs/heads/main/111.jpg"
+    },
+    {
+      "title": "مسار تكـ",
+      "description": "نظام محلي لإدارة أرشفة بحوث الترقية العلمية",
+      "title_en": "Masar Tech",
+      "description_en": "A local system for managing the archiving of scientific promotion research,",
+      "link": "https://abubesun-hub.github.io/I.tech/programs.html",
+      "image": "assets/images/project-5.jpg"
     }
   ],
   "contacts": {
-    "email": "ahmed.hussien@example.com",
-    "phone": "+2010XXXXXXX",
-    "whatsapp": "2010XXXXXXX",
-    "linkedin": "https://www.linkedin.com/in/ahmed-hussien-ali",
-    "github": "https://github.com/your-account"
+    "email": "abubesun@gmail.com",
+    "phone": "+964 7905880479",
+    "whatsapp": "+964 7817823680",
+    "linkedin": "",
+    "github": ""
   },
   "settings": {
     "defaultTheme": "dark"
