@@ -5,6 +5,24 @@ function removeItem(btn) {
   }
 }
 
+function moveItemUp(btn) {
+  const item = btn.closest(".repeatable-item");
+  if (!item || !item.parentNode) return;
+  const previous = item.previousElementSibling;
+  if (previous) {
+    item.parentNode.insertBefore(item, previous);
+  }
+}
+
+function moveItemDown(btn) {
+  const item = btn.closest(".repeatable-item");
+  if (!item || !item.parentNode) return;
+  const next = item.nextElementSibling;
+  if (next) {
+    item.parentNode.insertBefore(next, item);
+  }
+}
+
 function createExperienceBlock(item) {
   const div = document.createElement("div");
   div.className = "repeatable-item";
@@ -49,7 +67,11 @@ function createExperienceBlock(item) {
         <textarea name="exp_description_en[]" rows="2"></textarea>
       </div>
     </div>
-    <button type="button" class="remove-btn" onclick="removeItem(this)">حذف</button>
+    <div class="item-actions">
+      <button type="button" class="move-btn" onclick="moveItemUp(this)">▲</button>
+      <button type="button" class="move-btn" onclick="moveItemDown(this)">▼</button>
+      <button type="button" class="remove-btn" onclick="removeItem(this)">حذف</button>
+    </div>
   `;
   if (item) {
     const roleInput = div.querySelector('input[name="exp_role[]"]');
