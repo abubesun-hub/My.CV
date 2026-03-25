@@ -29,6 +29,26 @@ function createExperienceBlock(item) {
         <textarea name="exp_description[]" rows="2"></textarea>
       </div>
     </div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label>Job Title (English)</label>
+        <input type="text" name="exp_role_en[]" />
+      </div>
+      <div class="form-group">
+        <label>Company (English)</label>
+        <input type="text" name="exp_company_en[]" />
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label>Period (English)</label>
+        <input type="text" name="exp_period_en[]" />
+      </div>
+      <div class="form-group">
+        <label>Description (English)</label>
+        <textarea name="exp_description_en[]" rows="2"></textarea>
+      </div>
+    </div>
     <button type="button" class="remove-btn" onclick="removeItem(this)">حذف</button>
   `;
   if (item) {
@@ -36,11 +56,19 @@ function createExperienceBlock(item) {
     const companyInput = div.querySelector('input[name="exp_company[]"]');
     const periodInput = div.querySelector('input[name="exp_period[]"]');
     const descInput = div.querySelector('textarea[name="exp_description[]"]');
+    const roleEnInput = div.querySelector('input[name="exp_role_en[]"]');
+    const companyEnInput = div.querySelector('input[name="exp_company_en[]"]');
+    const periodEnInput = div.querySelector('input[name="exp_period_en[]"]');
+    const descEnInput = div.querySelector('textarea[name="exp_description_en[]"]');
 
     if (roleInput) roleInput.value = item.role || "";
     if (companyInput) companyInput.value = item.company || "";
     if (periodInput) periodInput.value = item.period || "";
     if (descInput) descInput.value = item.description || "";
+    if (roleEnInput) roleEnInput.value = item.role_en || "";
+    if (companyEnInput) companyEnInput.value = item.company_en || "";
+    if (periodEnInput) periodEnInput.value = item.period_en || "";
+    if (descEnInput) descEnInput.value = item.description_en || "";
   }
 
   return div;
@@ -70,6 +98,26 @@ function createEducationBlock(item) {
         <textarea name="edu_description[]" rows="2"></textarea>
       </div>
     </div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label>Degree (English)</label>
+        <input type="text" name="edu_degree_en[]" />
+      </div>
+      <div class="form-group">
+        <label>Institution (English)</label>
+        <input type="text" name="edu_institution_en[]" />
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label>Period (English)</label>
+        <input type="text" name="edu_period_en[]" />
+      </div>
+      <div class="form-group">
+        <label>Description (English)</label>
+        <textarea name="edu_description_en[]" rows="2"></textarea>
+      </div>
+    </div>
     <button type="button" class="remove-btn" onclick="removeItem(this)">حذف</button>
   `;
   if (item) {
@@ -77,11 +125,19 @@ function createEducationBlock(item) {
     const instInput = div.querySelector('input[name="edu_institution[]"]');
     const periodInput = div.querySelector('input[name="edu_period[]"]');
     const descInput = div.querySelector('textarea[name="edu_description[]"]');
+    const degreeEnInput = div.querySelector('input[name="edu_degree_en[]"]');
+    const instEnInput = div.querySelector('input[name="edu_institution_en[]"]');
+    const periodEnInput = div.querySelector('input[name="edu_period_en[]"]');
+    const descEnInput = div.querySelector('textarea[name="edu_description_en[]"]');
 
     if (degreeInput) degreeInput.value = item.degree || "";
     if (instInput) instInput.value = item.institution || "";
     if (periodInput) periodInput.value = item.period || "";
     if (descInput) descInput.value = item.description || "";
+    if (degreeEnInput) degreeEnInput.value = item.degree_en || "";
+    if (instEnInput) instEnInput.value = item.institution_en || "";
+    if (periodEnInput) periodEnInput.value = item.period_en || "";
+    if (descEnInput) descEnInput.value = item.description_en || "";
   }
 
   return div;
@@ -101,14 +157,22 @@ function createSkillBlock(item) {
         <input type="number" name="skill_level[]" min="0" max="100" value="80" />
       </div>
     </div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label>اسم المهارة (إنجليزي)</label>
+        <input type="text" name="skill_name_en[]" />
+      </div>
+    </div>
     <button type="button" class="remove-btn" onclick="removeItem(this)">حذف</button>
   `;
   if (item) {
     const nameInput = div.querySelector('input[name="skill_name[]"]');
     const levelInput = div.querySelector('input[name="skill_level[]"]');
+    const nameEnInput = div.querySelector('input[name="skill_name_en[]"]');
 
     if (nameInput) nameInput.value = item.name || "";
     if (levelInput) levelInput.value = item.level != null ? item.level : 80;
+    if (nameEnInput) nameEnInput.value = item.name_en || "";
   }
 
   return div;
@@ -126,6 +190,14 @@ function createProjectBlock(item) {
       <label>الوصف</label>
       <textarea name="project_description[]" rows="2"></textarea>
     </div>
+    <div class="form-group">
+      <label>Project Title (English)</label>
+      <input type="text" name="project_title_en[]" />
+    </div>
+    <div class="form-group">
+      <label>Description (English)</label>
+      <textarea name="project_description_en[]" rows="2"></textarea>
+    </div>
     <div class="grid-2">
       <div class="form-group">
         <label>رابط المشروع</label>
@@ -141,11 +213,15 @@ function createProjectBlock(item) {
   if (item) {
     const titleInput = div.querySelector('input[name="project_title[]"]');
     const descInput = div.querySelector('textarea[name="project_description[]"]');
+    const titleEnInput = div.querySelector('input[name="project_title_en[]"]');
+    const descEnInput = div.querySelector('textarea[name="project_description_en[]"]');
     const linkInput = div.querySelector('input[name="project_link[]"]');
     const imageInput = div.querySelector('input[name="project_image[]"]');
 
     if (titleInput) titleInput.value = item.title || "";
     if (descInput) descInput.value = item.description || "";
+    if (titleEnInput) titleEnInput.value = item.title_en || "";
+    if (descEnInput) descEnInput.value = item.description_en || "";
     if (linkInput) linkInput.value = item.link || "";
     if (imageInput) imageInput.value = item.image || "";
   }
@@ -196,12 +272,20 @@ function loadDataIntoForm() {
       const profileLocation = document.getElementById("profileLocation");
       const profileSummary = document.getElementById("profileSummary");
       const profileImage = document.getElementById("profileImage");
+      const profileNameEn = document.getElementById("profileNameEn");
+      const profileTitleEn = document.getElementById("profileTitleEn");
+      const profileLocationEn = document.getElementById("profileLocationEn");
+      const profileSummaryEn = document.getElementById("profileSummaryEn");
 
       if (profileName) profileName.value = profile.name || "";
       if (profileTitle) profileTitle.value = profile.title || "";
       if (profileLocation) profileLocation.value = profile.location || "";
       if (profileSummary) profileSummary.value = profile.summary || "";
       if (profileImage) profileImage.value = profile.profileImage || "";
+      if (profileNameEn) profileNameEn.value = profile.name_en || "";
+      if (profileTitleEn) profileTitleEn.value = profile.title_en || "";
+      if (profileLocationEn) profileLocationEn.value = profile.location_en || "";
+      if (profileSummaryEn) profileSummaryEn.value = profile.summary_en || "";
 
       const expList = document.getElementById("experienceList");
       if (expList) {
@@ -260,6 +344,10 @@ function buildDataFromForm() {
   const profileLocation = document.getElementById("profileLocation");
   const profileSummary = document.getElementById("profileSummary");
   const profileImage = document.getElementById("profileImage");
+  const profileNameEn = document.getElementById("profileNameEn");
+  const profileTitleEn = document.getElementById("profileTitleEn");
+  const profileLocationEn = document.getElementById("profileLocationEn");
+  const profileSummaryEn = document.getElementById("profileSummaryEn");
 
   base.profile.name = profileName ? profileName.value.trim() : base.profile.name || "";
   base.profile.title = profileTitle ? profileTitle.value.trim() : base.profile.title || "";
@@ -269,6 +357,14 @@ function buildDataFromForm() {
     profileSummary ? profileSummary.value.trim() : base.profile.summary || "";
   base.profile.profileImage =
     profileImage ? profileImage.value.trim() : base.profile.profileImage || "";
+  base.profile.name_en =
+    profileNameEn ? profileNameEn.value.trim() : base.profile.name_en || "";
+  base.profile.title_en =
+    profileTitleEn ? profileTitleEn.value.trim() : base.profile.title_en || "";
+  base.profile.location_en =
+    profileLocationEn ? profileLocationEn.value.trim() : base.profile.location_en || "";
+  base.profile.summary_en =
+    profileSummaryEn ? profileSummaryEn.value.trim() : base.profile.summary_en || "";
 
   const expItems = document.querySelectorAll("#experienceList .repeatable-item");
   base.experience = Array.from(expItems).map((el, index) => {
@@ -277,6 +373,10 @@ function buildDataFromForm() {
     const company = el.querySelector('input[name="exp_company[]"]');
     const period = el.querySelector('input[name="exp_period[]"]');
     const desc = el.querySelector('textarea[name="exp_description[]"]');
+    const roleEn = el.querySelector('input[name="exp_role_en[]"]');
+    const companyEn = el.querySelector('input[name="exp_company_en[]"]');
+    const periodEn = el.querySelector('input[name="exp_period_en[]"]');
+    const descEn = el.querySelector('textarea[name="exp_description_en[]"]');
 
     return {
       ...existing,
@@ -284,6 +384,10 @@ function buildDataFromForm() {
       company: company ? company.value.trim() : "",
       period: period ? period.value.trim() : "",
       description: desc ? desc.value.trim() : "",
+      role_en: roleEn ? roleEn.value.trim() : existing.role_en || "",
+      company_en: companyEn ? companyEn.value.trim() : existing.company_en || "",
+      period_en: periodEn ? periodEn.value.trim() : existing.period_en || "",
+      description_en: descEn ? descEn.value.trim() : existing.description_en || "",
     };
   });
 
@@ -294,6 +398,10 @@ function buildDataFromForm() {
     const inst = el.querySelector('input[name="edu_institution[]"]');
     const period = el.querySelector('input[name="edu_period[]"]');
     const desc = el.querySelector('textarea[name="edu_description[]"]');
+    const degreeEn = el.querySelector('input[name="edu_degree_en[]"]');
+    const instEn = el.querySelector('input[name="edu_institution_en[]"]');
+    const periodEn = el.querySelector('input[name="edu_period_en[]"]');
+    const descEn = el.querySelector('textarea[name="edu_description_en[]"]');
 
     return {
       ...existing,
@@ -301,6 +409,10 @@ function buildDataFromForm() {
       institution: inst ? inst.value.trim() : "",
       period: period ? period.value.trim() : "",
       description: desc ? desc.value.trim() : "",
+      degree_en: degreeEn ? degreeEn.value.trim() : existing.degree_en || "",
+      institution_en: instEn ? instEn.value.trim() : existing.institution_en || "",
+      period_en: periodEn ? periodEn.value.trim() : existing.period_en || "",
+      description_en: descEn ? descEn.value.trim() : existing.description_en || "",
     };
   });
 
@@ -309,6 +421,7 @@ function buildDataFromForm() {
     const existing = (originalData.skills || [])[index] || {};
     const name = el.querySelector('input[name="skill_name[]"]');
     const level = el.querySelector('input[name="skill_level[]"]');
+     const nameEn = el.querySelector('input[name="skill_name_en[]"]');
 
     const levelValue = level ? Number(level.value) : existing.level || 0;
 
@@ -316,6 +429,7 @@ function buildDataFromForm() {
       ...existing,
       name: name ? name.value.trim() : "",
       level: isNaN(levelValue) ? 0 : levelValue,
+      name_en: nameEn ? nameEn.value.trim() : existing.name_en || "",
     };
   });
 
@@ -324,6 +438,8 @@ function buildDataFromForm() {
     const existing = (originalData.projects || [])[index] || {};
     const title = el.querySelector('input[name="project_title[]"]');
     const desc = el.querySelector('textarea[name="project_description[]"]');
+    const titleEn = el.querySelector('input[name="project_title_en[]"]');
+    const descEn = el.querySelector('textarea[name="project_description_en[]"]');
     const link = el.querySelector('input[name="project_link[]"]');
     const image = el.querySelector('input[name="project_image[]"]');
 
@@ -331,6 +447,8 @@ function buildDataFromForm() {
       ...existing,
       title: title ? title.value.trim() : "",
       description: desc ? desc.value.trim() : "",
+      title_en: titleEn ? titleEn.value.trim() : existing.title_en || "",
+      description_en: descEn ? descEn.value.trim() : existing.description_en || "",
       link: link ? link.value.trim() : "",
       image: image ? image.value.trim() : "",
     };

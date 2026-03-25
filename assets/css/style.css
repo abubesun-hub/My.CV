@@ -83,8 +83,8 @@ body.dark-theme {
 }
 
 .hero-image img {
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 300px;
   border-radius: 32px;
   object-fit: cover;
   box-shadow: var(--shadow-soft);
