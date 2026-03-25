@@ -280,6 +280,10 @@ function buildSkills(skills, lang) {
     const clamped = isNaN(level) ? 0 : Math.max(0, Math.min(100, level));
 
     const name = lang === "en" && skill.name_en ? skill.name_en : skill.name || "";
+    const description =
+      lang === "en" && skill.description_en
+        ? skill.description_en
+        : skill.description || "";
 
     const div = document.createElement("div");
     div.className = "skill";
@@ -291,6 +295,7 @@ function buildSkills(skills, lang) {
       <div class="skill-bar">
         <div class="skill-bar-fill" style="width: ${clamped}%"></div>
       </div>
+      ${description ? `<p class="skill-description">${escapeHtml(description)}</p>` : ""}
     `;
 
     container.appendChild(div);

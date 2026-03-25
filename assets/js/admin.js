@@ -185,16 +185,32 @@ function createSkillBlock(item) {
         <input type="text" name="skill_name_en[]" />
       </div>
     </div>
-    <button type="button" class="remove-btn" onclick="removeItem(this)">حذف</button>
+    <div class="form-group">
+      <label>وصف المهارة</label>
+      <textarea name="skill_description[]" rows="2"></textarea>
+    </div>
+    <div class="form-group">
+      <label>وصف المهارة (إنجليزي)</label>
+      <textarea name="skill_description_en[]" rows="2"></textarea>
+    </div>
+    <div class="item-actions">
+      <button type="button" class="move-btn" onclick="moveItemUp(this)">▲</button>
+      <button type="button" class="move-btn" onclick="moveItemDown(this)">▼</button>
+      <button type="button" class="remove-btn" onclick="removeItem(this)">حذف</button>
+    </div>
   `;
   if (item) {
     const nameInput = div.querySelector('input[name="skill_name[]"]');
     const levelInput = div.querySelector('input[name="skill_level[]"]');
     const nameEnInput = div.querySelector('input[name="skill_name_en[]"]');
+    const descInput = div.querySelector('textarea[name="skill_description[]"]');
+    const descEnInput = div.querySelector('textarea[name="skill_description_en[]"]');
 
     if (nameInput) nameInput.value = item.name || "";
     if (levelInput) levelInput.value = item.level != null ? item.level : 80;
     if (nameEnInput) nameEnInput.value = item.name_en || "";
+    if (descInput) descInput.value = item.description || "";
+    if (descEnInput) descEnInput.value = item.description_en || "";
   }
 
   return div;
@@ -443,7 +459,9 @@ function buildDataFromForm() {
     const existing = (originalData.skills || [])[index] || {};
     const name = el.querySelector('input[name="skill_name[]"]');
     const level = el.querySelector('input[name="skill_level[]"]');
-     const nameEn = el.querySelector('input[name="skill_name_en[]"]');
+    const nameEn = el.querySelector('input[name="skill_name_en[]"]');
+    const desc = el.querySelector('textarea[name="skill_description[]"]');
+    const descEn = el.querySelector('textarea[name="skill_description_en[]"]');
 
     const levelValue = level ? Number(level.value) : existing.level || 0;
 
@@ -452,6 +470,8 @@ function buildDataFromForm() {
       name: name ? name.value.trim() : "",
       level: isNaN(levelValue) ? 0 : levelValue,
       name_en: nameEn ? nameEn.value.trim() : existing.name_en || "",
+      description: desc ? desc.value.trim() : existing.description || "",
+      description_en: descEn ? descEn.value.trim() : existing.description_en || "",
     };
   });
 

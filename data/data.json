@@ -148,37 +148,51 @@
     {
       "name": "هندسة البرمجيات",
       "name_en": "Software Engineering",
-      "level": 90
+      "level": 90,
+      "description": "مستوى متقدم في استخدام (Microsoft Visual Basic) وتصميم البرمجيات المحاسبية المخصصة.",
+      "description_en": "dvanced proficiency in Microsoft Visual Basic and designing custom accounting software."
     },
     {
       "name": "أساسيات SAP (وحدات MM/SD)",
       "name_en": "SAP (MM / SD basics)",
-      "level": 80
+      "level": 80,
+      "description": "",
+      "description_en": ""
     },
     {
       "name": "رسم وتحسين العمليات",
       "name_en": "Process Mapping & Improvement",
-      "level": 85
+      "level": 85,
+      "description": "",
+      "description_en": ""
     },
     {
       "name": "إعداد التقارير باستخدام Excel",
       "name_en": "Microsoft Excel & Reporting",
-      "level": 90
+      "level": 90,
+      "description": "",
+      "description_en": ""
     },
     {
       "name": "توثيق المتطلبات (BRD / SRS)",
       "name_en": "Documentation (BRD / SRS)",
-      "level": 80
+      "level": 80,
+      "description": "",
+      "description_en": ""
     },
     {
       "name": "مهارات الاتصال والعرض",
       "name_en": "Communication & Presentation",
-      "level": 85
+      "level": 85,
+      "description": "",
+      "description_en": ""
     },
     {
       "name": "حل المشكلات",
       "name_en": "Problem Solving",
-      "level": 88
+      "level": 88,
+      "description": "",
+      "description_en": ""
     }
   ],
   "projects": [
