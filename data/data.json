@@ -124,30 +124,30 @@
   ],
   "education": [
     {
-      "degree": "بكالوريوس تجارة",
-      "institution": "كلية التجارة - جامعة القاهرة",
-      "period": "2011 - 2015",
-      "description": "تخصص محاسبة وإدارة أعمال، دراسة مبادئ المالية، المحاسبة، الاقتصاد، والإدارة، مع مشاريع تطبيقية على تحليل البيانات المالية.",
-      "degree_en": "Bachelor of Commerce",
-      "institution_en": "Faculty of Commerce, Cairo University",
-      "period_en": "2011 - 2015",
-      "description_en": "Major in Accounting and Business Administration, covering finance, accounting, economics and management with applied projects in financial data analysis."
+      "degree": "بكالوريوس لغة انكليزية",
+      "institution": "جامعة الانبار - كلية الاداب",
+      "period": "2005-2008",
+      "description": "كلية الاداب - لغة انكليزية",
+      "degree_en": "Bachelor of English",
+      "institution_en": "Anbar university - Collage of Arts",
+      "period_en": "2005-2008",
+      "description_en": "Collage of Arts- English Dep."
     },
     {
-      "degree": "دورات في SAP وتحليل الأعمال",
+      "degree": "دورات في ERPوتحليل الأعمال",
       "institution": "منصات تعليمية ومراكز تدريب",
       "period": "2018 - 2023",
-      "description": "حضور دورات تدريبية في أساسيات SAP، تحليل الأعمال (Business Analysis)، وكتابة المتطلبات (Requirements Engineering) باستخدام أفضل الممارسات العالمية.",
-      "degree_en": "Courses in SAP & Business Analysis",
+      "description": "حضور دورات تدريبية في أساسيات ERP، تحليل الأعمال (Business Analysis)، وكتابة المتطلبات (Requirements Engineering) باستخدام أفضل الممارسات العالمية.",
+      "degree_en": "Courses in ERP & Business Analysis",
       "institution_en": "Online Platforms & Training Centers",
       "period_en": "2018 - 2023",
-      "description_en": "Completed several courses on SAP fundamentals, Business Analysis, and Requirements Engineering following international best practices."
+      "description_en": "Completed several courses on ERP fundamentals, Business Analysis, and Requirements Engineering following international best practices."
     }
   ],
   "skills": [
     {
-      "name": "تحليل الأعمال",
-      "name_en": "Business Analysis",
+      "name": "هندسة البرمجيات",
+      "name_en": "Software Engineering",
       "level": 90
     },
     {
