@@ -3,7 +3,7 @@
     "name": "أحمد حسين علي",
     "title": "محلل أعمال وأنظمة SAP",
     "summary": "محترف في تحليل الأعمال وأنظمة تخطيط موارد المؤسسات (ERP)، بخبرة في تصميم وتحسين العمليات التجارية وربطها بالأنظمة الرقمية لضمان كفاءة أعلى ودقة في التقارير واتخاذ القرار.",
-    "location": "القاهرة، مصر",
+    "location": "العراق، الرمادي",
     "name_en": "Ahmed Hussien Ali",
     "title_en": "SAP & Business Analyst",
     "summary_en": "Professional business and ERP analyst with experience in designing and improving business processes, aligning them with digital systems to increase efficiency and provide accurate reporting for better decision making.",
@@ -65,7 +65,11 @@
     }
   ],
   "skills": [
-    { "name": "تحليل الأعمال", "name_en": "Business Analysis", "level": 90 },
+    {
+      "name": "تحليل الأعمال",
+      "name_en": "Business Analysis",
+      "level": 90
+    },
     {
       "name": "أساسيات SAP (وحدات MM/SD)",
       "name_en": "SAP (MM / SD basics)",

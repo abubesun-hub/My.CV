@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة التحكم - السيرة الذاتية</title>
+  <link rel="stylesheet" href="assets/css/admin.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- شاشة تسجيل الدخول -->
+  <div id="loginView" class="login-body">
+    <div class="login-wrapper">
+      <div class="login-card" id="loginCard">
+        <h1>تسجيل دخول لوحة التحكم</h1>
+        <form id="adminLoginForm">
+          <div class="form-group">
+            <label for="username">اسم المستخدم</label>
+            <input type="text" id="username" autocomplete="username" required />
+          </div>
+          <div class="form-group">
+            <label for="password">كلمة المرور</label>
+            <input type="password" id="password" autocomplete="current-password" required />
+          </div>
+          <button type="submit" class="btn primary full">دخول</button>
+          <p id="loginError" class="alert error" style="display:none; margin-top:0.8rem;">
+            بيانات الدخول غير صحيحة.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- لوحة التحكم بعد تسجيل الدخول -->
+  <div id="adminPanel" class="admin-wrapper" style="display:none;">
+    <header class="admin-header">
+      <h1>لوحة التحكم - السيرة الذاتية</h1>
+      <div class="admin-header-actions">
+        <a href="index.html" target="_blank" class="btn secondary small">عرض الموقع</a>
+        <button type="button" class="btn secondary small" id="btnLogout">تسجيل الخروج</button>
+      </div>
+    </header>
+
+    <main class="admin-main">
+      <form id="adminDataForm" class="admin-form">
+        <div id="adminAlert" class="alert success" style="display:none;"></div>
+
+        <section class="card">
+          <div class="card-header">
+            <h2>الملف الشخصي</h2>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="profileName">الاسم (عربي)</label>
+              <input type="text" id="profileName" />
+            </div>
+            <div class="form-group">
+              <label for="profileTitle">المسمى الوظيفي (عربي)</label>
+              <input type="text" id="profileTitle" />
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="profileLocation">الموقع (عربي)</label>
+              <input type="text" id="profileLocation" />
+            </div>
+            <div class="form-group">
+              <label for="profileImage">مسار صورة الملف الشخصي</label>
+              <input type="text" id="profileImage" placeholder="assets/images/profile.jpg" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="profileSummary">النبذة (عربي)</label>
+            <textarea id="profileSummary" rows="3"></textarea>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <h2>الخبرات العملية</h2>
+            <button type="button" class="btn secondary small" onclick="addExperienceRow()">إضافة خبرة</button>
+          </div>
+          <div id="experienceList" class="repeatable-list"></div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <h2>التعليم</h2>
+            <button type="button" class="btn secondary small" onclick="addEducationRow()">إضافة مؤهل</button>
+          </div>
+          <div id="educationList" class="repeatable-list"></div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <h2>المهارات</h2>
+            <button type="button" class="btn secondary small" onclick="addSkillRow()">إضافة مهارة</button>
+          </div>
+          <div id="skillsList" class="repeatable-list"></div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <h2>المشاريع</h2>
+            <button type="button" class="btn secondary small" onclick="addProjectRow()">إضافة مشروع</button>
+          </div>
+          <div id="projectsList" class="repeatable-list"></div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <h2>بيانات التواصل</h2>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="contactEmail">البريد الإلكتروني</label>
+              <input type="email" id="contactEmail" />
+            </div>
+            <div class="form-group">
+              <label for="contactPhone">الهاتف</label>
+              <input type="text" id="contactPhone" />
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="contactWhatsapp">واتساب (بدون +)</label>
+              <input type="text" id="contactWhatsapp" />
+            </div>
+            <div class="form-group">
+              <label for="contactLinkedin">رابط لينكدإن</label>
+              <input type="url" id="contactLinkedin" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="contactGithub">رابط GitHub</label>
+            <input type="url" id="contactGithub" />
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <h2>الإعدادات</h2>
+          </div>
+          <div class="form-group">
+            <label for="defaultTheme">الوضع الافتراضي للموقع</label>
+            <select id="defaultTheme">
+              <option value="light">وضع فاتح</option>
+              <option value="dark">وضع داكن</option>
+            </select>
+          </div>
+        </section>
+
+        <div class="form-actions">
+          <button type="button" class="btn secondary" id="btnReloadFromFile">إعادة التحميل من الملف</button>
+          <button type="button" class="btn primary" id="btnGenerateJson">توليد JSON الجديد</button>
+        </div>
+
+        <section class="card">
+          <div class="card-header">
+            <h2>ملف البيانات (data.json)</h2>
+          </div>
+          <p style="font-size:0.85rem; margin-bottom:0.6rem;">
+            بعد الضغط على "توليد JSON الجديد"، انسخ المحتوى التالي وضعه مكان ملف
+            <strong>data/data.json</strong> في GitHub.
+          </p>
+          <div class="form-group">
+            <textarea id="jsonOutput" rows="14" style="width:100%; font-family:Consolas, monospace;"></textarea>
+          </div>
+        </section>
+      </form>
+    </main>
+  </div>
+
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
