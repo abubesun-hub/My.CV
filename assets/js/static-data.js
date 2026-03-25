@@ -214,7 +214,7 @@ function buildExperience(experience, lang) {
       <div class="timeline-content">
         <h4>${escapeHtml(role)}</h4>
         <p class="company">${escapeHtml(company)}</p>
-        <p>${escapeHtml(description)}</p>
+        <p>${formatMultiline(description)}</p>
       </div>
     `;
 
@@ -253,7 +253,7 @@ function buildEducation(education, lang) {
       <div class="timeline-content">
         <h4>${escapeHtml(degree)}</h4>
         <p class="company">${escapeHtml(institution)}</p>
-        <p>${escapeHtml(description)}</p>
+        <p>${formatMultiline(description)}</p>
       </div>
     `;
 
@@ -330,7 +330,7 @@ function buildProjects(projects, lang) {
       ${imagePart}
       <div class="project-content">
         <h4>${escapeHtml(title)}</h4>
-        <p>${escapeHtml(description)}</p>
+        <p>${formatMultiline(description)}</p>
         ${linkPart}
       </div>
     `;
@@ -405,6 +405,11 @@ function updateFooter(profile, lang) {
       nameValue || ""
     )}${t(lang, "footerSuffix")}`;
   }
+}
+
+function formatMultiline(text) {
+  const safe = escapeHtml(text || "");
+  return safe.replace(/\n/g, "<br>");
 }
 
 function escapeHtml(str) {
