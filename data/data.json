@@ -153,25 +153,25 @@
       "description_en": "dvanced proficiency in Microsoft Visual Basic and designing custom accounting software."
     },
     {
-      "name": "أساسيات SAP (وحدات MM/SD)",
-      "name_en": "SAP (MM / SD basics)",
+      "name": "البنية التحتية والشبكات",
+      "name_en": "IT Infrastructure",
       "level": 80,
-      "description": "",
-      "description_en": ""
+      "description": "صيانة مكونات الحاسوب (Hardware/Software)، وإعداد وتكوين الشبكات (Access Point, D-Link, Wi-Fi، والاتصالات المباشرة).",
+      "description_en": "Hardware and software maintenance , network configuration (Access Point, D-Link, Wi-Fi, direct connections)."
     },
     {
-      "name": "رسم وتحسين العمليات",
-      "name_en": "Process Mapping & Improvement",
+      "name": "الإدارة والبيانات",
+      "name_en": "Administration & Data",
       "level": 85,
-      "description": "",
-      "description_en": ""
+      "description": "إجادة تامة لاستخدام حزمة (Microsoft Office) بما في ذلك (Word, Excel)، وإدارة قواعد البيانات وإدخالها.",
+      "description_en": "Advanced command of Microsoft Office tools (Word, Excel, Database entry)."
     },
     {
-      "name": "إعداد التقارير باستخدام Excel",
-      "name_en": "Microsoft Excel & Reporting",
+      "name": "المهارات الإدارية",
+      "name_en": "Management",
       "level": 90,
-      "description": "",
-      "description_en": ""
+      "description": "قدرات قيادية وإدارة فِرق العمل، مع مهارات تواصل وتنظيم ممتازة اكتسبت من خلال التدرج في الوظائف التقنية.",
+      "description_en": "Leadership capabilities, managing a core team , with strong organizational and communication skills gained through diverse IT roles."
     },
     {
       "name": "توثيق المتطلبات (BRD / SRS)",
@@ -197,12 +197,12 @@
   ],
   "projects": [
     {
-      "title": "رقمنة دورة طلبات الشراء",
-      "description": "إعادة تصميم دورة طلبات الشراء من نموذج ورقي إلى نموذج رقمي متكامل، مع تتبع الموافقات وتقارير حالة الطلبات، مما ساهم في تقليل زمن الدورة وتحسين الشفافية.",
-      "title_en": "Digitalization of Purchase Request Cycle",
-      "description_en": "Redesign of the purchase request cycle from a paper-based model to a fully digital workflow with approval tracking and status reports, reducing cycle time and improving transparency.",
-      "link": "https://github.com/your-account/purchase-cycle-demo",
-      "image": "assets/images/project-1.jpg"
+      "title": "تطوير البرمجيات",
+      "description": "تصميم وتطوير برامج تجارية وتعليمية متخصصة تشمل برنامج \"جدولي\"، وبرنامج \"محاسب تك\"، بالإضافة إلى نظام شامل لأرشفة البحوث.",
+      "title_en": "Educational & Archiving Software",
+      "description_en": "Developed commercial programs including \"Jadwaly\", \"Mohasib Tech\", and a comprehensive research archiving system.",
+      "link": "https://abubesun-hub.github.io/I.tech/programs.html#programs",
+      "image": "https://raw.githubusercontent.com/abubesun-hub/mypic/refs/heads/main/11.jpg"
     },
     {
       "title": "لوحة مؤشرات الأداء التشغيلي (KPI Dashboard)",
@@ -213,11 +213,11 @@
       "image": "assets/images/project-2.jpg"
     },
     {
-      "title": "مكتبة توثيق إجراءات العمل (SOPs)",
-      "description": "إعداد مكتبة متكاملة لإجراءات العمل (SOPs) ورسوم تدفق العمليات (Process Flowcharts) لأقسام متعددة داخل الشركة، مما سهّل تدريب الموظفين الجدد وتوحيد طريقة العمل.",
-      "title_en": "Process Documentation Library",
-      "description_en": "Created a complete library of Standard Operating Procedures (SOPs) and process flowcharts for multiple departments, which simplified onboarding and unified the way of working.",
-      "link": "",
+      "title": "تطوير الويب",
+      "description": "تصميم وإطلاق موقع إلكتروني مخصص لنشر وإدارة المناقصات الخاصة بالمقاولين في العراق.",
+      "title_en": "Web Development",
+      "description_en": "Designed and launched a dedicated web platform for publishing tenders for contractors in Iraq.",
+      "link": "https://abubesun-hub.github.io/I.tech/tenders-new.html",
       "image": "assets/images/project-3.jpg"
     }
   ],
@@ -229,6 +229,6 @@
     "github": "https://github.com/your-account"
   },
   "settings": {
-    "defaultTheme": "light"
+    "defaultTheme": "dark"
   }
 }
