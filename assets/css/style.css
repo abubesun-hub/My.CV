@@ -118,6 +118,7 @@ body.dark-theme .hero-text h2 {
   font-size: 0.98rem;
   line-height: 1.7;
   color: var(--color-text-muted-light);
+  text-align: justify;
 }
 
 body.dark-theme .hero-text .summary {
