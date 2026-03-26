@@ -15,8 +15,8 @@ const uiText = {
     sectionEducation: "التعليم",
     sectionSkills: "المهارات",
     sectionProjects: "المشاريع والأعمال",
+    pageTitle: "الصفحة التعريفية لـ أحمد حسين علي",
     sectionContact: "التواصل",
-    heroDownload: "تحميل السيرة الذاتية PDF",
     heroContact: "تواصل معي",
     socialBarTitle: "تابعني على المنصات",
     placeholderExperience: "لم يتم إضافة خبرات بعد.",
@@ -46,8 +46,8 @@ const uiText = {
     sectionEducation: "Education",
     sectionSkills: "Skills",
     sectionProjects: "Projects & Portfolio",
+    pageTitle: "Ahmed Hussien Ali - Personal Profile",
     sectionContact: "Contact",
-    heroDownload: "Download CV (PDF)",
     heroContact: "Contact Me",
     socialBarTitle: "Follow me on social platforms",
     placeholderExperience: "No experience added yet.",
@@ -147,7 +147,6 @@ function applyUiText(lang) {
   const titleSkills = document.getElementById("titleSkills");
   const titleProjects = document.getElementById("titleProjects");
   const titleContact = document.getElementById("titleContact");
-  const btnDownloadCv = document.getElementById("btnDownloadCv");
   const btnHeroContact = document.getElementById("btnHeroContact");
   const socialBarTitle = document.getElementById("socialBarTitle");
 
@@ -162,9 +161,9 @@ function applyUiText(lang) {
   if (titleSkills) titleSkills.textContent = t(lang, "sectionSkills");
   if (titleProjects) titleProjects.textContent = t(lang, "sectionProjects");
   if (titleContact) titleContact.textContent = t(lang, "sectionContact");
-  if (btnDownloadCv) btnDownloadCv.textContent = t(lang, "heroDownload");
   if (btnHeroContact) btnHeroContact.textContent = t(lang, "heroContact");
   if (socialBarTitle) socialBarTitle.textContent = t(lang, "socialBarTitle");
+  document.title = t(lang, "pageTitle");
 }
 
 function buildProfile(profile, lang) {

@@ -62,7 +62,6 @@ $socialPlatforms = [
                     <p class="summary"><?php echo nl2br(htmlspecialchars($profile['summary'] ?? '')); ?></p>
                     <p class="location"><?php echo htmlspecialchars($profile['location'] ?? ''); ?></p>
                     <div class="hero-actions">
-                        <a href="CV%20Ahmed%20Hussien%20Ali.pdf" class="btn primary" download>تحميل السيرة الذاتية PDF</a>
                         <a href="#contact" class="btn outline">تواصل معي</a>
                     </div>
                 </div>
