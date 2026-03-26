@@ -376,7 +376,7 @@ function buildContacts(contacts, lang) {
     cards.push(
       `<li class="contact-card"><span class="contact-label">${t(lang, "contactLabelPhone")}</span><a href="tel:${escapeAttribute(
         contacts.phone
-      )}" class="contact-value">${escapeHtml(contacts.phone)}</a><a href="tel:${escapeAttribute(
+      )}" class="contact-value ltr-text">${escapeHtml(contacts.phone)}</a><a href="tel:${escapeAttribute(
         contacts.phone
       )}" class="contact-action">${t(lang, "contactActionPhone")}</a></li>`
     );
@@ -387,7 +387,7 @@ function buildContacts(contacts, lang) {
     cards.push(
       `<li class="contact-card"><span class="contact-label">${t(lang, "contactLabelWhatsapp")}</span><a href="https://wa.me/${escapeAttribute(
         whatsappNumber
-      )}" target="_blank" class="contact-value">${escapeHtml(contacts.whatsapp)}</a><a href="https://wa.me/${escapeAttribute(
+      )}" target="_blank" class="contact-value ltr-text">${escapeHtml(contacts.whatsapp)}</a><a href="https://wa.me/${escapeAttribute(
         whatsappNumber
       )}" target="_blank" class="contact-action">${t(lang, "contactActionWhatsapp")}</a></li>`
     );

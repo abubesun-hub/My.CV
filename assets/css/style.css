@@ -646,6 +646,11 @@ body.dark-theme .contact-label {
   word-break: break-all;
 }
 
+.ltr-text {
+  direction: ltr;
+  unicode-bidi: bidi-override;
+}
+
 body.dark-theme .contact-value {
   color: var(--color-text-dark);
 }

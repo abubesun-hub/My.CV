@@ -196,14 +196,14 @@ $socialPlatforms = [
                                 <?php if (!empty($contacts['phone'])): ?>
                                     <li class="contact-card">
                                         <span class="contact-label">الهاتف</span>
-                                        <a class="contact-value" href="tel:<?php echo htmlspecialchars($contacts['phone']); ?>"><?php echo htmlspecialchars($contacts['phone']); ?></a>
+                                        <a class="contact-value ltr-text" href="tel:<?php echo htmlspecialchars($contacts['phone']); ?>"><?php echo htmlspecialchars($contacts['phone']); ?></a>
                                         <a class="contact-action" href="tel:<?php echo htmlspecialchars($contacts['phone']); ?>">اتصال مباشر</a>
                                     </li>
                                 <?php endif; ?>
                                 <?php if (!empty($contacts['whatsapp'])): ?>
                                     <li class="contact-card">
                                         <span class="contact-label">واتساب</span>
-                                        <a class="contact-value" href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $contacts['whatsapp'])); ?>" target="_blank"><?php echo htmlspecialchars($contacts['whatsapp']); ?></a>
+                                        <a class="contact-value ltr-text" href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $contacts['whatsapp'])); ?>" target="_blank"><?php echo htmlspecialchars($contacts['whatsapp']); ?></a>
                                         <a class="contact-action" href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $contacts['whatsapp'])); ?>" target="_blank">مراسلة</a>
                                     </li>
                                 <?php endif; ?>
