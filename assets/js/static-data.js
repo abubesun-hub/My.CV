@@ -16,6 +16,12 @@ const uiText = {
     sectionSkills: "المهارات",
     sectionProjects: "المشاريع والأعمال",
     pageTitle: "الصفحة التعريفية لـ أحمد حسين علي",
+    pdfDownloadLabel: "تحميل السيرة الذاتية PDF",
+    pdfModalTitle: "أدخل رمز التحميل",
+    pdfModalPlaceholder: "الرمز السري",
+    pdfModalError: "الرمز غير صحيح، حاول مجدداً",
+    pdfModalConfirm: "تحميل PDF",
+    pdfModalCancel: "إلغاء",
     sectionContact: "التواصل",
     heroContact: "تواصل معي",
     socialBarTitle: "تابعني على المنصات",
@@ -47,6 +53,12 @@ const uiText = {
     sectionSkills: "Skills",
     sectionProjects: "Projects & Portfolio",
     pageTitle: "Ahmed Hussien Ali - Personal Profile",
+    pdfDownloadLabel: "Download CV as PDF",
+    pdfModalTitle: "Enter Download Code",
+    pdfModalPlaceholder: "Secret code",
+    pdfModalError: "Incorrect code, please try again",
+    pdfModalConfirm: "Download PDF",
+    pdfModalCancel: "Cancel",
     sectionContact: "Contact",
     heroContact: "Contact Me",
     socialBarTitle: "Follow me on social platforms",
@@ -86,11 +98,13 @@ document.addEventListener("DOMContentLoaded", () => {
       applyDefaultTheme((data.settings || {}).defaultTheme);
       applyLanguage(currentLang);
       initLanguageSwitch();
+      initPdfDownload();
     })
     .catch(() => {
       // في حال فشل التحميل نضبط فقط اللغة للواجهة الثابتة
       applyLanguage(currentLang);
       initLanguageSwitch();
+      initPdfDownload();
     });
 });
 
@@ -437,8 +451,380 @@ function buildContacts(contacts, lang) {
     )}"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="${platform.icon}"></path></svg></a>`;
   });
 
-  socialBar.innerHTML = icons.join("");
+  const downloadBtnHtml = `<button class="social-icon download-cv-icon" id="downloadCvBtn" type="button" aria-label="${escapeAttribute(t(lang, 'pdfDownloadLabel'))}" title="${escapeAttribute(t(lang, 'pdfDownloadLabel'))}"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 13.5l-3.5-3.5H8.5V5h3v5H13.5L10 13.5zM4.5 16.5h11V18H4.5v-1.5z"/></svg></button>`;
+
+  socialBar.innerHTML = icons.join("") + downloadBtnHtml;
 }
+
+// ─── PDF Download ────────────────────────────────────────────────────────────
+
+const _PDF_CODE_HASH = "991df0b4d26f9622701aded9924358e74d930fa4d1cc63983c61a75d70d8b33f";
+
+function initPdfDownload() {
+  // Event delegation — button is rebuilt on lang change
+  document.addEventListener("click", function (e) {
+    if (e.target.closest("#downloadCvBtn")) {
+      showPdfModal();
+    }
+  });
+
+  const modal = document.getElementById("pdfCodeModal");
+  if (!modal) return;
+
+  const input = document.getElementById("pdfCodeInput");
+  const confirmBtn = document.getElementById("pdfConfirmBtn");
+  const cancelBtn = document.getElementById("pdfCancelBtn");
+
+  cancelBtn.addEventListener("click", hidePdfModal);
+  modal.addEventListener("click", function (e) {
+    if (e.target === modal) hidePdfModal();
+  });
+  confirmBtn.addEventListener("click", handlePdfConfirm);
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") handlePdfConfirm();
+  });
+}
+
+function showPdfModal() {
+  const modal = document.getElementById("pdfCodeModal");
+  const titleEl = document.getElementById("pdfModalTitle");
+  const input = document.getElementById("pdfCodeInput");
+  const confirmBtn = document.getElementById("pdfConfirmBtn");
+  const cancelBtn = document.getElementById("pdfCancelBtn");
+  const errorEl = document.getElementById("pdfCodeError");
+  if (!modal) return;
+
+  if (titleEl) titleEl.textContent = t(currentLang, "pdfModalTitle");
+  if (input) input.placeholder = t(currentLang, "pdfModalPlaceholder");
+  if (confirmBtn) confirmBtn.textContent = t(currentLang, "pdfModalConfirm");
+  if (cancelBtn) cancelBtn.textContent = t(currentLang, "pdfModalCancel");
+
+  // Align modal to current page direction
+  const box = modal.querySelector(".pdf-modal-box");
+  if (box) box.dir = currentLang === "en" ? "ltr" : "rtl";
+
+  modal.hidden = false;
+  input.value = "";
+  errorEl.hidden = true;
+  setTimeout(function () { input.focus(); }, 60);
+}
+
+function hidePdfModal() {
+  const modal = document.getElementById("pdfCodeModal");
+  if (modal) modal.hidden = true;
+}
+
+function handlePdfConfirm() {
+  const input = document.getElementById("pdfCodeInput");
+  const errorEl = document.getElementById("pdfCodeError");
+  const code = input ? input.value.trim() : "";
+  if (!code) return;
+
+  verifyPdfCode(code).then(function (valid) {
+    if (!valid) {
+      if (errorEl) {
+        errorEl.textContent = t(currentLang, "pdfModalError");
+        errorEl.hidden = false;
+      }
+      if (input) { input.value = ""; input.focus(); }
+      return;
+    }
+    hidePdfModal();
+    generateCvPdf(currentLang);
+  });
+}
+
+function verifyPdfCode(code) {
+  return crypto.subtle
+    .digest("SHA-256", new TextEncoder().encode(code))
+    .then(function (buf) {
+      const hex = Array.from(new Uint8Array(buf))
+        .map(function (b) { return b.toString(16).padStart(2, "0"); })
+        .join("");
+      return hex === _PDF_CODE_HASH;
+    })
+    .catch(function () { return false; });
+}
+
+function generateCvPdf(lang) {
+  if (!cvData) {
+    alert(lang === "ar" ? "البيانات غير متاحة بعد" : "Data not available yet.");
+    return;
+  }
+
+  const btn = document.getElementById("downloadCvBtn");
+  if (btn) btn.classList.add("loading");
+
+  const profile = cvData.profile || {};
+  const rawName = lang === "en" && profile.name_en ? profile.name_en : (profile.name || "CV");
+  const filename = rawName.replace(/\s+/g, "-") + "-CV.pdf";
+
+  const pdfHtml = buildPdfHtml(lang);
+  const printWindow = window.open("", "_blank");
+  if (!printWindow || printWindow.closed || typeof printWindow.closed === "undefined") {
+    alert(lang === "ar"
+      ? "لم يتم فتح نافذة الطباعة، يرجى السماح بالنوافذ المنبثقة"
+      : "Could not open print window. Please allow pop-ups.");
+    if (btn) btn.classList.remove("loading");
+    return;
+  }
+
+  const docHtml = "<!DOCTYPE html>" +
+    "<html lang=\"" + (lang === "ar" ? "ar" : "en") + "\">" +
+    "<head><meta charset=\"utf-8\"><title>" + filename + "</title></head>" +
+    "<body style=\"margin:0;padding:0;background:#ffffff;\">" +
+    pdfHtml +
+    "</body></html>";
+
+  const finalize = function () {
+    if (btn) btn.classList.remove("loading");
+  };
+
+  try {
+    printWindow.document.open();
+    printWindow.document.write(docHtml);
+    printWindow.document.close();
+
+    const triggerPrint = function () {
+      try {
+        printWindow.focus();
+        printWindow.print();
+      } catch (e) {
+        // ignore
+      }
+      setTimeout(function () {
+        try { printWindow.close(); } catch (e) { }
+        finalize();
+      }, 500);
+    };
+
+    if (printWindow.document.readyState === "complete") {
+      triggerPrint();
+    } else {
+      printWindow.onload = triggerPrint;
+    }
+  } catch (e) {
+    finalize();
+  }
+}
+
+function createPdfRenderMount() {
+  const mount = document.createElement("div");
+  mount.style.position = "absolute";
+  mount.style.left = "-100000px";
+  mount.style.top = "0";
+  mount.style.width = "210mm";
+  mount.style.minHeight = "297mm";
+  mount.style.background = "#ffffff";
+  mount.style.pointerEvents = "none";
+  mount.style.zIndex = "-9999";
+  mount.setAttribute("aria-hidden", "true");
+  document.body.appendChild(mount);
+  return mount;
+}
+
+function destroyPdfRenderMount(mount) {
+  if (mount && mount.parentNode) {
+    mount.parentNode.removeChild(mount);
+  }
+}
+
+function waitForPdfAssets(root) {
+  const images = Array.from(root.querySelectorAll("img"));
+  const imageLoads = images.map(function (img) {
+    return new Promise(function (resolve) {
+      if (img.complete) {
+        resolve();
+        return;
+      }
+      img.addEventListener("load", resolve, { once: true });
+      img.addEventListener("error", resolve, { once: true });
+    });
+  });
+
+  const fontsReady = document.fonts && document.fonts.ready
+    ? document.fonts.ready.catch(function () { return null; })
+    : Promise.resolve();
+
+  return Promise.all([fontsReady].concat(imageLoads));
+}
+
+function buildPdfHtml(lang) {
+  var isAr = lang === "ar";
+  var dir = isAr ? "rtl" : "ltr";
+  var profile = cvData.profile || {};
+  var experience = cvData.experience || [];
+  var education = cvData.education || [];
+  var skills = cvData.skills || [];
+  var projects = cvData.projects || [];
+  var contacts = cvData.contacts || {};
+
+  var name = isAr ? (profile.name || "") : (profile.name_en || profile.name || "");
+  var title = isAr ? (profile.title || "") : (profile.title_en || profile.title || "");
+  var summary = isAr ? (profile.summary || "") : (profile.summary_en || profile.summary || "");
+  var location = isAr ? (profile.location || "") : (profile.location_en || profile.location || "");
+
+  var photoHtml = profile.profileImage
+    ? `<img src="${escapeAttribute(profile.profileImage)}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,0.55);flex-shrink:0;" crossorigin="anonymous" />`
+    : `<div style="width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.18);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:2rem;">👤</div>`;
+
+  var chips = [];
+  if (contacts.email) {
+    chips.push(`<a href="mailto:${escapeAttribute(contacts.email)}" style="background:rgba(255,255,255,0.18);border-radius:100px;padding:2px 9px;font-size:9.5px;white-space:nowrap;text-decoration:none;color:inherit;">✉ ${escapeHtml(contacts.email)}</a>`);
+  }
+  if (contacts.phone) {
+    var telHref = "tel:" + normalizeWhatsapp(contacts.phone);
+    chips.push(`<a href="${escapeAttribute(telHref)}" style="background:rgba(255,255,255,0.18);border-radius:100px;padding:2px 9px;font-size:9.5px;white-space:nowrap;text-decoration:none;color:inherit;">📞 ${escapeHtml(contacts.phone)}</a>`);
+  }
+  if (contacts.linkedin) {
+    chips.push(`<a href="${escapeAttribute(contacts.linkedin)}" target="_blank" rel="noopener" style="background:rgba(255,255,255,0.18);border-radius:100px;padding:2px 9px;font-size:9.5px;white-space:nowrap;text-decoration:none;color:inherit;">in ${shortUrl(contacts.linkedin)}</a>`);
+  }
+  if (contacts.github) {
+    chips.push(`<a href="${escapeAttribute(contacts.github)}" target="_blank" rel="noopener" style="background:rgba(255,255,255,0.18);border-radius:100px;padding:2px 9px;font-size:9.5px;white-space:nowrap;text-decoration:none;color:inherit;">⌂ ${shortUrl(contacts.github)}</a>`);
+  }
+
+  var headerHtml = `
+    <div style="background:linear-gradient(135deg,#1e3a5f 0%,#1d4ed8 100%);color:#fff;padding:22px 32px;display:flex;align-items:center;gap:20px;direction:${dir};">
+      ${isAr ? "" : photoHtml}
+      <div style="flex:1;direction:${dir};">
+        <div style="font-size:24px;font-weight:700;margin-bottom:4px;">${escapeHtml(name)}</div>
+        <div style="font-size:13px;opacity:0.9;margin-bottom:4px;">${escapeHtml(title)}</div>
+        <div style="font-size:11px;opacity:0.8;margin-bottom:10px;">📍 ${escapeHtml(location)}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;">${chips.join("")}</div>
+      </div>
+      ${isAr ? photoHtml : ""}
+    </div>`;
+
+  var sectionStyle = "margin-bottom:18px;direction:" + dir + ";";
+  var titleStyle = "font-size:12.5px;font-weight:700;color:#1e40af;border-bottom:2px solid #bfdbfe;padding-bottom:4px;margin-bottom:10px;letter-spacing:0.04em;";
+
+  var summaryHtml = summary
+    ? `<div style="${sectionStyle}"><div style="${titleStyle}">${isAr ? "نبذة مختصرة" : "PROFESSIONAL SUMMARY"}</div><div style="font-size:11.5px;color:#475569;line-height:1.8;">${escapeHtml(summary).replace(/\n/g, "<br>")}</div></div>`
+    : "";
+
+  var expItems = experience.map(function (item) {
+    var role    = isAr ? (item.role    || "") : (item.role_en    || item.role    || "");
+    var company = isAr ? (item.company || "") : (item.company_en || item.company || "");
+    var period  = isAr ? (item.period  || "") : (item.period_en  || item.period  || "");
+    var desc    = isAr ? (item.description || "") : (item.description_en || item.description || "");
+    return `<div style="display:flex;gap:10px;margin-bottom:11px;">
+      <div style="width:7px;height:7px;border-radius:50%;background:#2563eb;margin-top:5px;flex-shrink:0;"></div>
+      <div style="flex:1;">
+        <div style="font-weight:700;font-size:11.5px;color:#1e293b;">${escapeHtml(role)}</div>
+        <div style="font-size:10.5px;color:#2563eb;margin-bottom:2px;">${escapeHtml(company)} <span style="color:#94a3b8;"> · ${escapeHtml(period)}</span></div>
+        ${desc ? `<div style="font-size:10.5px;color:#475569;line-height:1.7;">${escapeHtml(desc).replace(/\n/g, "<br>")}</div>` : ""}
+      </div>
+    </div>`;
+  }).join("");
+
+  var expSection = experience.length
+    ? `<div style="${sectionStyle}"><div style="${titleStyle}">${isAr ? "الخبرات العملية" : "WORK EXPERIENCE"}</div>${expItems}</div>`
+    : "";
+
+  var eduItems = education.map(function (item) {
+    var degree      = isAr ? (item.degree      || "") : (item.degree_en      || item.degree      || "");
+    var institution = isAr ? (item.institution || "") : (item.institution_en || item.institution || "");
+    var period      = isAr ? (item.period      || "") : (item.period_en      || item.period      || "");
+    var desc        = isAr ? (item.description || "") : (item.description_en || item.description || "");
+    return `<div style="display:flex;gap:10px;margin-bottom:11px;">
+      <div style="width:7px;height:7px;border-radius:50%;background:#0ea5e9;margin-top:5px;flex-shrink:0;"></div>
+      <div style="flex:1;">
+        <div style="font-weight:700;font-size:11px;color:#1e293b;">${escapeHtml(degree)}</div>
+        <div style="font-size:10px;color:#0ea5e9;margin-bottom:2px;">${escapeHtml(institution)} <span style="color:#94a3b8;"> · ${escapeHtml(period)}</span></div>
+        ${desc ? `<div style="font-size:10px;color:#475569;line-height:1.6;">${escapeHtml(desc).replace(/\n/g, "<br>")}</div>` : ""}
+      </div>
+    </div>`;
+  }).join("");
+
+  var eduSection = education.length
+    ? `<div style="${sectionStyle}"><div style="${titleStyle}">${isAr ? "التعليم" : "EDUCATION"}</div>${eduItems}</div>`
+    : "";
+
+  var skillItems = skills.map(function (skill) {
+    var sName  = isAr ? (skill.name || "") : (skill.name_en || skill.name || "");
+    var level  = Math.max(0, Math.min(100, Number(skill.level) || 0));
+    return `<div style="margin-bottom:7px;">
+      <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:3px;">
+        <span style="font-weight:600;color:#1e293b;">${escapeHtml(sName)}</span>
+        <span style="color:#94a3b8;">${level}%</span>
+      </div>
+      <div style="height:5px;background:#e2e8f0;border-radius:100px;">
+        <div style="height:5px;background:linear-gradient(90deg,#1e40af,#3b82f6);border-radius:100px;width:${level}%;"></div>
+      </div>
+    </div>`;
+  }).join("");
+
+  var skillsSection = skills.length
+    ? `<div style="${sectionStyle}"><div style="${titleStyle}">${isAr ? "المهارات" : "SKILLS"}</div><div style="column-count:2;column-gap:22px;">${skillItems}</div></div>`
+    : "";
+
+  var projectItems = projects.map(function (project) {
+    var pTitle = isAr ? (project.title || "") : (project.title_en || project.title || "");
+    var pDesc  = isAr ? (project.description || "") : (project.description_en || project.description || "");
+    return `<div style="margin-bottom:10px;">
+      <div style="font-weight:700;font-size:11px;color:#1e293b;">${escapeHtml(pTitle)}</div>
+      ${pDesc ? `<div style="font-size:10px;color:#475569;line-height:1.6;">${escapeHtml(pDesc).replace(/\n/g, "<br>")}</div>` : ""}
+      ${project.link ? `<div style="font-size:9.5px;color:#2563eb;margin-top:2px;">${escapeHtml(project.link)}</div>` : ""}
+    </div>`;
+  }).join("");
+
+  var projectsSection = projects.length
+    ? `<div style="${sectionStyle}"><div style="${titleStyle}">${isAr ? "المشاريع والأعمال" : "PROJECTS & PORTFOLIO"}</div>${projectItems}</div>`
+    : "";
+
+  var socialIcons = [];
+  if (contacts.linkedin) {
+    socialIcons.push(`<a href="${escapeAttribute(contacts.linkedin)}" target="_blank" rel="noopener" style="width:22px;height:22px;border-radius:999px;background:#1d4ed8;color:#ffffff;display:inline-flex;align-items:center;justify-content:center;font-size:11px;text-decoration:none;">in</a>`);
+  }
+  if (contacts.github) {
+    socialIcons.push(`<a href="${escapeAttribute(contacts.github)}" target="_blank" rel="noopener" style="width:22px;height:22px;border-radius:999px;background:#0f172a;color:#ffffff;display:inline-flex;align-items:center;justify-content:center;font-size:11px;text-decoration:none;">GH</a>`);
+  }
+  if (contacts.phone) {
+    var fTel = "tel:" + normalizeWhatsapp(contacts.phone);
+    socialIcons.push(`<a href="${escapeAttribute(fTel)}" style="width:22px;height:22px;border-radius:999px;background:#16a34a;color:#ffffff;display:inline-flex;align-items:center;justify-content:center;font-size:11px;text-decoration:none;">☎</a>`);
+  }
+  if (contacts.email) {
+    socialIcons.push(`<a href="mailto:${escapeAttribute(contacts.email)}" style="width:22px;height:22px;border-radius:999px;background:#f97316;color:#ffffff;display:inline-flex;align-items:center;justify-content:center;font-size:11px;text-decoration:none;">✉</a>`);
+  }
+
+  var socialSection = socialIcons.length
+    ? `<div style="margin-top:6px;text-align:center;direction:${dir};">
+         <div style="font-size:10px;color:#64748b;margin-bottom:4px;">${isAr ? "روابط التواصل" : "Social Links"}</div>
+         <div style="display:inline-flex;gap:6px;">${socialIcons.join("")}</div>
+       </div>`
+    : "";
+
+  var year = new Date().getFullYear();
+  var footerLine = isAr
+    ? `© ${year} ${escapeHtml(profile.name || "")} - جميع الحقوق محفوظة`
+    : `© ${year} ${escapeHtml(profile.name_en || profile.name || "")} - All rights reserved`;
+
+  return `
+  <style>
+    @page { size: A4 portrait; margin: 8mm 10mm; }
+    .pdf-root { font-family: 'Cairo', sans-serif; background: #ffffff; color: #1e293b; font-size: 13px; line-height: 1.65; width: 100%; }
+    .pdf-content { padding: 18px 18px 22px; }
+    .pdf-section { margin-bottom: 18px; page-break-inside: avoid; break-inside: avoid; }
+    .pdf-item { page-break-inside: avoid; break-inside: avoid; }
+    .pdf-footer { margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e8f0; font-size: 9.5px; color: #94a3b8; text-align: center; }
+  </style>
+  <div class="pdf-root" dir="${dir}">
+    ${headerHtml}
+    <div class="pdf-content" style="direction:${dir};">
+      ${summaryHtml ? `<div class="pdf-section">${summaryHtml}</div>` : ""}
+      ${expSection ? `<div class="pdf-section">${expSection}</div>` : ""}
+      ${eduSection ? `<div class="pdf-section">${eduSection}</div>` : ""}
+      ${skillsSection ? `<div class="pdf-section">${skillsSection}</div>` : ""}
+      ${projectsSection ? `<div class="pdf-section">${projectsSection}</div>` : ""}
+      <div class="pdf-footer" style="direction:${dir};">
+        ${socialSection}
+        <div style="margin-top:6px;">${footerLine}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 
 function shortUrl(value) {
   const url = String(value || "").replace(/^https?:\/\//i, "").replace(/\/$/, "");

@@ -47,6 +47,8 @@ $socialPlatforms = [
     <script>
         // Pass default theme from backend to frontend
         window.DEFAULT_THEME = '<?php echo $defaultTheme === 'dark' ? 'dark' : 'light'; ?>';
+        // CV data available for PDF export
+        window.cvData = <?php echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP); ?>;
     </script>
 </head>
 <body>
@@ -232,6 +234,7 @@ $socialPlatforms = [
                                         <a href="#" class="social-icon disabled" aria-label="<?php echo htmlspecialchars($platform); ?>" aria-disabled="true"><?php echo htmlspecialchars($abbr); ?></a>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
+                                <button class="social-icon download-cv-icon" id="downloadCvBtn" type="button" aria-label="تحميل السيرة الذاتية PDF" title="تحميل السيرة الذاتية PDF"><svg viewBox="0 0 20 20" aria-hidden="true" style="width:19px;height:19px;fill:currentColor"><path d="M10 13.5l-3.5-3.5H8.5V5h3v5H13.5L10 13.5zM4.5 16.5h11V18H4.5v-1.5z"/></svg></button>
                             </div>
                         </div>
                     </div>
@@ -247,5 +250,23 @@ $socialPlatforms = [
     </div>
 
     <script src="assets/js/main.js"></script>
+    <!-- PDF export modal -->
+    <div id="pdfCodeModal" class="pdf-modal-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="pdfModalTitle">
+        <div class="pdf-modal-box" dir="rtl">
+            <h3 class="pdf-modal-title" id="pdfModalTitle">أدخل رمز التحميل</h3>
+            <input type="password" id="pdfCodeInput" class="pdf-code-input" placeholder="••••••" autocomplete="off" maxlength="30" />
+            <p id="pdfCodeError" class="pdf-code-error" hidden>الرمز غير صحيح، حاول مجداً</p>
+            <div class="pdf-modal-actions">
+                <button id="pdfConfirmBtn" class="btn primary pdf-confirm-btn">تحميل PDF</button>
+                <button id="pdfCancelBtn" class="btn outline pdf-cancel-btn">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden PDF rendering container -->
+    <div id="cvPdfContainer" aria-hidden="true" style="display:none;position:fixed;left:-9999px;top:0;width:210mm;background:#fff;z-index:-9999;"></div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

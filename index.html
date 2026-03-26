@@ -100,7 +100,24 @@
         </footer>
     </div>
 
+    <!-- PDF export modal -->
+    <div id="pdfCodeModal" class="pdf-modal-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="pdfModalTitle">
+        <div class="pdf-modal-box">
+            <h3 class="pdf-modal-title" id="pdfModalTitle">أدخل رمز التحميل</h3>
+            <input type="password" id="pdfCodeInput" class="pdf-code-input" placeholder="••••••" autocomplete="off" maxlength="30" />
+            <p id="pdfCodeError" class="pdf-code-error" hidden>الرمز غير صحيح، حاول مجدداً</p>
+            <div class="pdf-modal-actions">
+                <button id="pdfConfirmBtn" class="btn primary pdf-confirm-btn">تحميل PDF</button>
+                <button id="pdfCancelBtn" class="btn outline pdf-cancel-btn">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden PDF rendering container -->
+    <div id="cvPdfContainer" aria-hidden="true" style="display:none;position:fixed;left:-9999px;top:0;width:210mm;background:#fff;z-index:-9999;"></div>
+
     <script src="assets/js/static-data.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -676,3 +676,152 @@ body.dark-theme .placeholder {
     margin-right: 0.1rem;
   }
 }
+
+  /* ─── Download CV Icon ──────────────────────────────────────────────── */
+
+  .download-cv-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1.5px solid rgba(161, 98, 7, 0.45);
+    background: rgba(161, 98, 7, 0.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #92400e;
+    cursor: pointer;
+    transition: transform var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
+    outline: none;
+    flex-shrink: 0;
+  }
+
+  body.dark-theme .download-cv-icon {
+    border-color: rgba(251, 191, 36, 0.45);
+    background: rgba(251, 191, 36, 0.1);
+    color: #fbbf24;
+  }
+
+  .download-cv-icon svg {
+    width: 19px;
+    height: 19px;
+    fill: currentColor;
+  }
+
+  .download-cv-icon:hover {
+    transform: translateY(-2px);
+    background: rgba(161, 98, 7, 0.16);
+    border-color: rgba(161, 98, 7, 0.65);
+  }
+
+  body.dark-theme .download-cv-icon:hover {
+    background: rgba(251, 191, 36, 0.2);
+  }
+
+  .download-cv-icon.loading {
+    pointer-events: none;
+    animation: pdf-loading-pulse 1s ease-in-out infinite;
+  }
+
+  @keyframes pdf-loading-pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* ─── PDF Code Modal ────────────────────────────────────────────────── */
+
+  .pdf-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.52);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 9000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .pdf-modal-overlay[hidden] {
+    display: none;
+  }
+
+  .pdf-modal-box {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 2rem 1.75rem;
+    width: 100%;
+    max-width: 370px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.22);
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    direction: rtl;
+  }
+
+  body.dark-theme .pdf-modal-box {
+    background: #0f172a;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+  }
+
+  .pdf-modal-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text-light, #1e293b);
+    margin: 0;
+  }
+
+  body.dark-theme .pdf-modal-title {
+    color: var(--color-text-dark, #e2e8f0);
+  }
+
+  .pdf-code-input {
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.1rem;
+    outline: none;
+    text-align: center;
+    letter-spacing: 0.25em;
+    transition: border-color 0.2s;
+    background: transparent;
+    color: inherit;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .pdf-code-input:focus {
+    border-color: #2563eb;
+  }
+
+  body.dark-theme .pdf-code-input {
+    background: #1e293b;
+    border-color: #334155;
+    color: #e2e8f0;
+  }
+
+  body.dark-theme .pdf-code-input:focus {
+    border-color: #60a5fa;
+  }
+
+  .pdf-code-error {
+    color: #ef4444;
+    font-size: 0.85rem;
+    text-align: center;
+    margin: 0;
+  }
+
+  .pdf-code-error[hidden] {
+    display: none;
+  }
+
+  .pdf-modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  .pdf-confirm-btn { min-width: 130px; }
+  .pdf-cancel-btn  { min-width: 90px; }
