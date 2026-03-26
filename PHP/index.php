@@ -9,6 +9,30 @@ $projects = $data['projects'] ?? [];
 $contacts = $data['contacts'] ?? [];
 $settings = $data['settings'] ?? [];
 $defaultTheme = $settings['defaultTheme'] ?? 'light';
+$socialLinks = $contacts['socialLinks'] ?? [];
+
+if (empty($socialLinks['linkedin']) && !empty($contacts['linkedin'])) {
+    $socialLinks['linkedin'] = $contacts['linkedin'];
+}
+if (empty($socialLinks['github']) && !empty($contacts['github'])) {
+    $socialLinks['github'] = $contacts['github'];
+}
+if (empty($socialLinks['whatsapp']) && !empty($contacts['whatsapp'])) {
+    $socialLinks['whatsapp'] = 'https://wa.me/' . preg_replace('/[^0-9]/', '', $contacts['whatsapp']);
+}
+
+$socialPlatforms = [
+    'facebook' => 'FB',
+    'instagram' => 'IG',
+    'x' => 'X',
+    'youtube' => 'YT',
+    'tiktok' => 'TT',
+    'snapchat' => 'SC',
+    'telegram' => 'TG',
+    'linkedin' => 'IN',
+    'whatsapp' => 'WA',
+    'github' => 'GH'
+];
 ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -158,42 +182,58 @@ $defaultTheme = $settings['defaultTheme'] ?? 'light';
             <section id="contact" class="section">
                 <div class="container fade-in">
                     <h3 class="section-title">التواصل</h3>
-                    <div class="contact-layout">
-                        <form class="contact-form" onsubmit="return handleContactSubmit(event)">
-                            <div class="form-group">
-                                <label for="name">الاسم</label>
-                                <input type="text" id="name" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="email">البريد الإلكتروني</label>
-                                <input type="email" id="email" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="message">الرسالة</label>
-                                <textarea id="message" rows="4" required></textarea>
-                            </div>
-                            <button type="submit" class="btn primary full">إرسال</button>
-                            <p id="contactStatus" class="status"></p>
-                        </form>
-
-                        <div class="contact-info">
-                            <ul>
+                    <div class="contact-modern">
+                        <div class="contact-primary-bar">
+                            <ul class="contact-cards">
                                 <?php if (!empty($contacts['email'])): ?>
-                                    <li><strong>البريد:</strong> <a href="mailto:<?php echo htmlspecialchars($contacts['email']); ?>"><?php echo htmlspecialchars($contacts['email']); ?></a></li>
+                                    <li class="contact-card">
+                                        <span class="contact-label">البريد الإلكتروني</span>
+                                        <a class="contact-value" href="mailto:<?php echo htmlspecialchars($contacts['email']); ?>"><?php echo htmlspecialchars($contacts['email']); ?></a>
+                                        <a class="contact-action" href="mailto:<?php echo htmlspecialchars($contacts['email']); ?>">أرسل بريد</a>
+                                    </li>
                                 <?php endif; ?>
                                 <?php if (!empty($contacts['phone'])): ?>
-                                    <li><strong>الهاتف:</strong> <a href="tel:<?php echo htmlspecialchars($contacts['phone']); ?>"><?php echo htmlspecialchars($contacts['phone']); ?></a></li>
+                                    <li class="contact-card">
+                                        <span class="contact-label">الهاتف</span>
+                                        <a class="contact-value" href="tel:<?php echo htmlspecialchars($contacts['phone']); ?>"><?php echo htmlspecialchars($contacts['phone']); ?></a>
+                                        <a class="contact-action" href="tel:<?php echo htmlspecialchars($contacts['phone']); ?>">اتصال مباشر</a>
+                                    </li>
                                 <?php endif; ?>
                                 <?php if (!empty($contacts['whatsapp'])): ?>
-                                    <li><strong>واتساب:</strong> <a href="https://wa.me/<?php echo htmlspecialchars($contacts['whatsapp']); ?>" target="_blank">مراسلة واتساب</a></li>
+                                    <li class="contact-card">
+                                        <span class="contact-label">واتساب</span>
+                                        <a class="contact-value" href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $contacts['whatsapp'])); ?>" target="_blank"><?php echo htmlspecialchars($contacts['whatsapp']); ?></a>
+                                        <a class="contact-action" href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $contacts['whatsapp'])); ?>" target="_blank">مراسلة</a>
+                                    </li>
                                 <?php endif; ?>
                                 <?php if (!empty($contacts['linkedin'])): ?>
-                                    <li><strong>لينكدإن:</strong> <a href="<?php echo htmlspecialchars($contacts['linkedin']); ?>" target="_blank">الملف الشخصي</a></li>
+                                    <li class="contact-card">
+                                        <span class="contact-label">لينكدإن</span>
+                                        <a class="contact-value" href="<?php echo htmlspecialchars($contacts['linkedin']); ?>" target="_blank"><?php echo htmlspecialchars(preg_replace('/^https?:\/\//', '', $contacts['linkedin'])); ?></a>
+                                        <a class="contact-action" href="<?php echo htmlspecialchars($contacts['linkedin']); ?>" target="_blank">عرض الملف</a>
+                                    </li>
                                 <?php endif; ?>
                                 <?php if (!empty($contacts['github'])): ?>
-                                    <li><strong>جيت هاب:</strong> <a href="<?php echo htmlspecialchars($contacts['github']); ?>" target="_blank">الحساب</a></li>
+                                    <li class="contact-card">
+                                        <span class="contact-label">جيت هاب</span>
+                                        <a class="contact-value" href="<?php echo htmlspecialchars($contacts['github']); ?>" target="_blank"><?php echo htmlspecialchars(preg_replace('/^https?:\/\//', '', $contacts['github'])); ?></a>
+                                        <a class="contact-action" href="<?php echo htmlspecialchars($contacts['github']); ?>" target="_blank">زيارة الحساب</a>
+                                    </li>
                                 <?php endif; ?>
                             </ul>
+                        </div>
+                        <div class="contact-social-bar">
+                            <p class="social-title">تابعني على المنصات</p>
+                            <div class="social-icons">
+                                <?php foreach ($socialPlatforms as $platform => $abbr): ?>
+                                    <?php $platformUrl = trim($socialLinks[$platform] ?? ''); ?>
+                                    <?php if ($platformUrl !== ''): ?>
+                                        <a href="<?php echo htmlspecialchars($platformUrl); ?>" target="_blank" class="social-icon" aria-label="<?php echo htmlspecialchars($platform); ?>"><?php echo htmlspecialchars($abbr); ?></a>
+                                    <?php else: ?>
+                                        <a href="#" class="social-icon disabled" aria-label="<?php echo htmlspecialchars($platform); ?>" aria-disabled="true"><?php echo htmlspecialchars($abbr); ?></a>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                     </div>
                 </div>

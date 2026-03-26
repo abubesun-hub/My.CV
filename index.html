@@ -81,26 +81,13 @@
             <section id="contact" class="section">
                 <div class="container fade-in">
                     <h3 class="section-title" id="titleContact">التواصل</h3>
-                    <div class="contact-layout">
-                        <form class="contact-form" onsubmit="return handleContactSubmit(event)">
-                            <div class="form-group">
-                                <label for="name" id="labelName">الاسم</label>
-                                <input type="text" id="name" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="email" id="labelEmail">البريد الإلكتروني</label>
-                                <input type="email" id="email" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="message" id="labelMessage">الرسالة</label>
-                                <textarea id="message" rows="4" required></textarea>
-                            </div>
-                            <button type="submit" class="btn primary full" id="btnSend">إرسال</button>
-                            <p id="contactStatus" class="status"></p>
-                        </form>
-
-                        <div class="contact-info">
-                            <ul id="contactsList"></ul>
+                    <div class="contact-modern">
+                        <div class="contact-primary-bar">
+                            <ul id="contactsList" class="contact-cards"></ul>
+                        </div>
+                        <div class="contact-social-bar">
+                            <p class="social-title" id="socialBarTitle">تابعني على المنصات</p>
+                            <div id="socialIconsBar" class="social-icons"></div>
                         </div>
                     </div>
                 </div>

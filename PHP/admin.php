@@ -111,7 +111,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'phone' => $_POST['contact_phone'] ?? '',
         'whatsapp' => $_POST['contact_whatsapp'] ?? '',
         'linkedin' => $_POST['contact_linkedin'] ?? '',
-        'github' => $_POST['contact_github'] ?? ''
+        'github' => $_POST['contact_github'] ?? '',
+        'socialLinks' => [
+            'facebook' => $_POST['social_facebook'] ?? '',
+            'instagram' => $_POST['social_instagram'] ?? '',
+            'x' => $_POST['social_x'] ?? '',
+            'youtube' => $_POST['social_youtube'] ?? '',
+            'tiktok' => $_POST['social_tiktok'] ?? '',
+            'snapchat' => $_POST['social_snapchat'] ?? '',
+            'telegram' => $_POST['social_telegram'] ?? '',
+            'linkedin' => $_POST['social_linkedin'] ?? ($_POST['contact_linkedin'] ?? ''),
+            'whatsapp' => $_POST['social_whatsapp'] ?? '',
+            'github' => $_POST['social_github'] ?? ($_POST['contact_github'] ?? '')
+        ]
     ];
 
     // Settings
@@ -347,6 +359,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="form-group">
                         <label>رابط GitHub</label>
                         <input type="url" name="contact_github" value="<?php echo htmlspecialchars($contacts['github'] ?? ''); ?>" />
+                    </div>
+
+                    <?php $social = $contacts['socialLinks'] ?? []; ?>
+                    <h2 style="margin-top:0.6rem;">روابط أيقونات السوشيال (البار الثاني)</h2>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Facebook</label>
+                            <input type="url" name="social_facebook" value="<?php echo htmlspecialchars($social['facebook'] ?? ''); ?>" />
+                        </div>
+                        <div class="form-group">
+                            <label>Instagram</label>
+                            <input type="url" name="social_instagram" value="<?php echo htmlspecialchars($social['instagram'] ?? ''); ?>" />
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>X (Twitter)</label>
+                            <input type="url" name="social_x" value="<?php echo htmlspecialchars($social['x'] ?? ''); ?>" />
+                        </div>
+                        <div class="form-group">
+                            <label>YouTube</label>
+                            <input type="url" name="social_youtube" value="<?php echo htmlspecialchars($social['youtube'] ?? ''); ?>" />
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>TikTok</label>
+                            <input type="url" name="social_tiktok" value="<?php echo htmlspecialchars($social['tiktok'] ?? ''); ?>" />
+                        </div>
+                        <div class="form-group">
+                            <label>Snapchat</label>
+                            <input type="url" name="social_snapchat" value="<?php echo htmlspecialchars($social['snapchat'] ?? ''); ?>" />
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Telegram</label>
+                            <input type="url" name="social_telegram" value="<?php echo htmlspecialchars($social['telegram'] ?? ''); ?>" />
+                        </div>
+                        <div class="form-group">
+                            <label>LinkedIn</label>
+                            <input type="url" name="social_linkedin" value="<?php echo htmlspecialchars($social['linkedin'] ?? ($contacts['linkedin'] ?? '')); ?>" />
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>WhatsApp Link</label>
+                            <input type="url" name="social_whatsapp" value="<?php echo htmlspecialchars($social['whatsapp'] ?? ''); ?>" />
+                        </div>
+                        <div class="form-group">
+                            <label>GitHub</label>
+                            <input type="url" name="social_github" value="<?php echo htmlspecialchars($social['github'] ?? ($contacts['github'] ?? '')); ?>" />
+                        </div>
                     </div>
                 </section>
 

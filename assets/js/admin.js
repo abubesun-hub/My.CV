@@ -355,12 +355,36 @@ function loadDataIntoForm() {
       const whatsappInput = document.getElementById("contactWhatsapp");
       const linkedinInput = document.getElementById("contactLinkedin");
       const githubInput = document.getElementById("contactGithub");
+      const socialFacebook = document.getElementById("socialFacebook");
+      const socialInstagram = document.getElementById("socialInstagram");
+      const socialX = document.getElementById("socialX");
+      const socialYoutube = document.getElementById("socialYoutube");
+      const socialTiktok = document.getElementById("socialTiktok");
+      const socialSnapchat = document.getElementById("socialSnapchat");
+      const socialTelegram = document.getElementById("socialTelegram");
+      const socialLinkedin = document.getElementById("socialLinkedin");
+      const socialWhatsapp = document.getElementById("socialWhatsapp");
+      const socialGithub = document.getElementById("socialGithub");
 
       if (emailInput) emailInput.value = contacts.email || "";
       if (phoneInput) phoneInput.value = contacts.phone || "";
       if (whatsappInput) whatsappInput.value = contacts.whatsapp || "";
       if (linkedinInput) linkedinInput.value = contacts.linkedin || "";
       if (githubInput) githubInput.value = contacts.github || "";
+
+      const socialLinks = contacts.socialLinks || {};
+      if (socialFacebook) socialFacebook.value = socialLinks.facebook || "";
+      if (socialInstagram) socialInstagram.value = socialLinks.instagram || "";
+      if (socialX) socialX.value = socialLinks.x || "";
+      if (socialYoutube) socialYoutube.value = socialLinks.youtube || "";
+      if (socialTiktok) socialTiktok.value = socialLinks.tiktok || "";
+      if (socialSnapchat) socialSnapchat.value = socialLinks.snapchat || "";
+      if (socialTelegram) socialTelegram.value = socialLinks.telegram || "";
+      if (socialLinkedin) socialLinkedin.value = socialLinks.linkedin || contacts.linkedin || "";
+      if (socialWhatsapp) {
+        socialWhatsapp.value = socialLinks.whatsapp || contactsToWhatsapp(contacts.whatsapp);
+      }
+      if (socialGithub) socialGithub.value = socialLinks.github || contacts.github || "";
 
       const settings = originalData.settings || {};
       const defaultTheme = document.getElementById("defaultTheme");
@@ -502,6 +526,16 @@ function buildDataFromForm() {
   const whatsappInput = document.getElementById("contactWhatsapp");
   const linkedinInput = document.getElementById("contactLinkedin");
   const githubInput = document.getElementById("contactGithub");
+  const socialFacebook = document.getElementById("socialFacebook");
+  const socialInstagram = document.getElementById("socialInstagram");
+  const socialX = document.getElementById("socialX");
+  const socialYoutube = document.getElementById("socialYoutube");
+  const socialTiktok = document.getElementById("socialTiktok");
+  const socialSnapchat = document.getElementById("socialSnapchat");
+  const socialTelegram = document.getElementById("socialTelegram");
+  const socialLinkedin = document.getElementById("socialLinkedin");
+  const socialWhatsapp = document.getElementById("socialWhatsapp");
+  const socialGithub = document.getElementById("socialGithub");
 
   base.contacts.email = emailInput ? emailInput.value.trim() : base.contacts.email || "";
   base.contacts.phone = phoneInput ? phoneInput.value.trim() : base.contacts.phone || "";
@@ -511,12 +545,33 @@ function buildDataFromForm() {
     linkedinInput ? linkedinInput.value.trim() : base.contacts.linkedin || "";
   base.contacts.github =
     githubInput ? githubInput.value.trim() : base.contacts.github || "";
+  base.contacts.socialLinks = {
+    facebook: socialFacebook ? socialFacebook.value.trim() : "",
+    instagram: socialInstagram ? socialInstagram.value.trim() : "",
+    x: socialX ? socialX.value.trim() : "",
+    youtube: socialYoutube ? socialYoutube.value.trim() : "",
+    tiktok: socialTiktok ? socialTiktok.value.trim() : "",
+    snapchat: socialSnapchat ? socialSnapchat.value.trim() : "",
+    telegram: socialTelegram ? socialTelegram.value.trim() : "",
+    linkedin: socialLinkedin
+      ? socialLinkedin.value.trim()
+      : base.contacts.linkedin || "",
+    whatsapp: socialWhatsapp
+      ? socialWhatsapp.value.trim()
+      : contactsToWhatsapp(base.contacts.whatsapp),
+    github: socialGithub ? socialGithub.value.trim() : base.contacts.github || "",
+  };
 
   if (!base.settings) base.settings = {};
   const defaultTheme = document.getElementById("defaultTheme");
   if (defaultTheme) base.settings.defaultTheme = defaultTheme.value || "light";
 
   return base;
+}
+
+function contactsToWhatsapp(number) {
+  const cleaned = String(number || "").replace(/[^0-9]/g, "");
+  return cleaned ? `https://wa.me/${cleaned}` : "";
 }
 
 // Simple client-side login and data handling for admin.html (not secure for sensitive data)

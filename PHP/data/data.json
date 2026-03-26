@@ -15,7 +15,19 @@
     "phone": "",
     "whatsapp": "",
     "linkedin": "",
-    "github": ""
+    "github": "",
+    "socialLinks": {
+      "facebook": "",
+      "instagram": "",
+      "x": "",
+      "youtube": "",
+      "tiktok": "",
+      "snapchat": "",
+      "telegram": "",
+      "linkedin": "",
+      "whatsapp": "",
+      "github": ""
+    }
   },
   "settings": {
     "defaultTheme": "light"

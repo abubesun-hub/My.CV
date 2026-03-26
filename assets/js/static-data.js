@@ -18,19 +18,21 @@ const uiText = {
     sectionContact: "التواصل",
     heroDownload: "تحميل السيرة الذاتية PDF",
     heroContact: "تواصل معي",
-    contactName: "الاسم",
-    contactEmail: "البريد الإلكتروني",
-    contactMessage: "الرسالة",
-    contactSend: "إرسال",
+    socialBarTitle: "تابعني على المنصات",
     placeholderExperience: "لم يتم إضافة خبرات بعد.",
     placeholderEducation: "لم يتم إضافة تعليم بعد.",
     placeholderSkills: "لم يتم إضافة مهارات بعد.",
     placeholderProjects: "لم يتم إضافة مشاريع بعد.",
-    contactLabelEmail: "البريد:",
-    contactLabelPhone: "الهاتف:",
-    contactLabelWhatsapp: "واتساب:",
-    contactLabelLinkedin: "لينكدإن:",
-    contactLabelGithub: "جيت هاب:",
+    contactLabelEmail: "البريد الإلكتروني",
+    contactLabelPhone: "الهاتف",
+    contactLabelWhatsapp: "واتساب",
+    contactLabelLinkedin: "لينكدإن",
+    contactLabelGithub: "جيت هاب",
+    contactActionEmail: "أرسل بريد",
+    contactActionPhone: "اتصال مباشر",
+    contactActionWhatsapp: "مراسلة",
+    contactActionLinkedin: "عرض الملف",
+    contactActionGithub: "زيارة الحساب",
     footerSuffix: " - جميع الحقوق محفوظة."
   },
   en: {
@@ -47,19 +49,21 @@ const uiText = {
     sectionContact: "Contact",
     heroDownload: "Download CV (PDF)",
     heroContact: "Contact Me",
-    contactName: "Name",
-    contactEmail: "Email",
-    contactMessage: "Message",
-    contactSend: "Send",
+    socialBarTitle: "Follow me on social platforms",
     placeholderExperience: "No experience added yet.",
     placeholderEducation: "No education entries yet.",
     placeholderSkills: "No skills added yet.",
     placeholderProjects: "No projects added yet.",
-    contactLabelEmail: "Email:",
-    contactLabelPhone: "Phone:",
-    contactLabelWhatsapp: "WhatsApp:",
-    contactLabelLinkedin: "LinkedIn:",
-    contactLabelGithub: "GitHub:",
+    contactLabelEmail: "Email",
+    contactLabelPhone: "Phone",
+    contactLabelWhatsapp: "WhatsApp",
+    contactLabelLinkedin: "LinkedIn",
+    contactLabelGithub: "GitHub",
+    contactActionEmail: "Send Email",
+    contactActionPhone: "Call Now",
+    contactActionWhatsapp: "Start Chat",
+    contactActionLinkedin: "Open Profile",
+    contactActionGithub: "Visit Account",
     footerSuffix: " - All rights reserved."
   }
 };
@@ -145,10 +149,7 @@ function applyUiText(lang) {
   const titleContact = document.getElementById("titleContact");
   const btnDownloadCv = document.getElementById("btnDownloadCv");
   const btnHeroContact = document.getElementById("btnHeroContact");
-  const labelName = document.getElementById("labelName");
-  const labelEmail = document.getElementById("labelEmail");
-  const labelMessage = document.getElementById("labelMessage");
-  const btnSend = document.getElementById("btnSend");
+  const socialBarTitle = document.getElementById("socialBarTitle");
 
   if (logoEl) logoEl.textContent = t(lang, "logo");
   if (navExperience) navExperience.textContent = t(lang, "navExperience");
@@ -163,10 +164,7 @@ function applyUiText(lang) {
   if (titleContact) titleContact.textContent = t(lang, "sectionContact");
   if (btnDownloadCv) btnDownloadCv.textContent = t(lang, "heroDownload");
   if (btnHeroContact) btnHeroContact.textContent = t(lang, "heroContact");
-  if (labelName) labelName.textContent = t(lang, "contactName");
-  if (labelEmail) labelEmail.textContent = t(lang, "contactEmail");
-  if (labelMessage) labelMessage.textContent = t(lang, "contactMessage");
-  if (btnSend) btnSend.textContent = t(lang, "contactSend");
+  if (socialBarTitle) socialBarTitle.textContent = t(lang, "socialBarTitle");
 }
 
 function buildProfile(profile, lang) {
@@ -346,51 +344,110 @@ function buildProjects(projects, lang) {
 
 function buildContacts(contacts, lang) {
   const list = document.getElementById("contactsList");
-  if (!list) return;
+  const socialBar = document.getElementById("socialIconsBar");
+  if (!list || !socialBar) return;
 
-  const items = [];
+  const cards = [];
 
   if (contacts.email) {
-    items.push(
-      `<li><strong>${t(lang, "contactLabelEmail")}</strong> <a href="mailto:${escapeAttribute(
+    cards.push(
+      `<li class="contact-card"><span class="contact-label">${t(lang, "contactLabelEmail")}</span><a href="mailto:${escapeAttribute(
         contacts.email
-      )}">${escapeHtml(contacts.email)}</a></li>`
+      )}" class="contact-value">${escapeHtml(contacts.email)}</a><a href="mailto:${escapeAttribute(
+        contacts.email
+      )}" class="contact-action">${t(lang, "contactActionEmail")}</a></li>`
     );
   }
 
   if (contacts.phone) {
-    items.push(
-      `<li><strong>${t(lang, "contactLabelPhone")}</strong> <a href="tel:${escapeAttribute(
+    cards.push(
+      `<li class="contact-card"><span class="contact-label">${t(lang, "contactLabelPhone")}</span><a href="tel:${escapeAttribute(
         contacts.phone
-      )}">${escapeHtml(contacts.phone)}</a></li>`
+      )}" class="contact-value">${escapeHtml(contacts.phone)}</a><a href="tel:${escapeAttribute(
+        contacts.phone
+      )}" class="contact-action">${t(lang, "contactActionPhone")}</a></li>`
     );
   }
 
   if (contacts.whatsapp) {
-    items.push(
-      `<li><strong>${t(lang, "contactLabelWhatsapp")}</strong> <a href="https://wa.me/${escapeAttribute(
-        contacts.whatsapp
-      )}" target="_blank">WhatsApp</a></li>`
+    const whatsappNumber = normalizeWhatsapp(contacts.whatsapp);
+    cards.push(
+      `<li class="contact-card"><span class="contact-label">${t(lang, "contactLabelWhatsapp")}</span><a href="https://wa.me/${escapeAttribute(
+        whatsappNumber
+      )}" target="_blank" class="contact-value">${escapeHtml(contacts.whatsapp)}</a><a href="https://wa.me/${escapeAttribute(
+        whatsappNumber
+      )}" target="_blank" class="contact-action">${t(lang, "contactActionWhatsapp")}</a></li>`
     );
   }
 
   if (contacts.linkedin) {
-    items.push(
-      `<li><strong>${t(lang, "contactLabelLinkedin")}</strong> <a href="${escapeAttribute(
+    cards.push(
+      `<li class="contact-card"><span class="contact-label">${t(lang, "contactLabelLinkedin")}</span><a href="${escapeAttribute(
         contacts.linkedin
-      )}" target="_blank">Profile</a></li>`
+      )}" target="_blank" class="contact-value">${shortUrl(contacts.linkedin)}</a><a href="${escapeAttribute(
+        contacts.linkedin
+      )}" target="_blank" class="contact-action">${t(lang, "contactActionLinkedin")}</a></li>`
     );
   }
 
   if (contacts.github) {
-    items.push(
-      `<li><strong>${t(lang, "contactLabelGithub")}</strong> <a href="${escapeAttribute(
+    cards.push(
+      `<li class="contact-card"><span class="contact-label">${t(lang, "contactLabelGithub")}</span><a href="${escapeAttribute(
         contacts.github
-      )}" target="_blank">Account</a></li>`
+      )}" target="_blank" class="contact-value">${shortUrl(contacts.github)}</a><a href="${escapeAttribute(
+        contacts.github
+      )}" target="_blank" class="contact-action">${t(lang, "contactActionGithub")}</a></li>`
     );
   }
 
-  list.innerHTML = items.join("");
+  list.innerHTML = cards.join("");
+
+  const socialDefaults = {
+    linkedin: contacts.linkedin || "",
+    whatsapp: contacts.whatsapp ? `https://wa.me/${normalizeWhatsapp(contacts.whatsapp)}` : "",
+    github: contacts.github || ""
+  };
+
+  const socialLinks = {
+    ...socialDefaults,
+    ...(contacts.socialLinks || {})
+  };
+
+  const socialPlatforms = [
+    { key: "facebook", label: "Facebook", icon: "M18.896 0H1.104A1.104 1.104 0 000 1.104v17.792A1.104 1.104 0 001.104 20H10.68v-7.74H8.078V9.235h2.602V7.01c0-2.577 1.574-3.98 3.872-3.98 1.1 0 2.045.082 2.32.118v2.69h-1.592c-1.248 0-1.49.593-1.49 1.463v1.934h2.98l-.388 3.025H13.79V20h5.106A1.104 1.104 0 0020 18.896V1.104A1.104 1.104 0 0018.896 0z" },
+    { key: "instagram", label: "Instagram", icon: "M10 0C7.284 0 6.944.012 5.88.06c-1.062.049-1.786.217-2.42.463a4.893 4.893 0 00-1.768 1.15A4.893 4.893 0 00.54 3.46C.294 4.094.126 4.818.077 5.88.03 6.944.018 7.284.018 10c0 2.716.012 3.056.059 4.12.049 1.062.217 1.786.463 2.42a4.893 4.893 0 001.15 1.768 4.893 4.893 0 001.768 1.15c.634.246 1.358.414 2.42.463 1.064.047 1.404.059 4.12.059 2.716 0 3.056-.012 4.12-.059 1.062-.049 1.786-.217 2.42-.463a5.01 5.01 0 002.918-2.918c.246-.634.414-1.358.463-2.42.047-1.064.059-1.404.059-4.12 0-2.716-.012-3.056-.059-4.12-.049-1.062-.217-1.786-.463-2.42A4.89 4.89 0 0018.327 1.69a4.893 4.893 0 00-1.768-1.15c-.634-.246-1.358-.414-2.42-.463C13.074.012 12.734 0 10 0zm0 1.802c2.671 0 2.987.01 4.038.057.972.044 1.5.207 1.85.344.464.181.795.398 1.143.746.348.348.565.679.746 1.143.137.35.3.878.344 1.85.047 1.051.057 1.367.057 4.038 0 2.671-.01 2.987-.057 4.038-.044.972-.207 1.5-.344 1.85a3.09 3.09 0 01-.746 1.143 3.09 3.09 0 01-1.143.746c-.35.137-.878.3-1.85.344-1.051.047-1.367.057-4.038.057-2.671 0-2.987-.01-4.038-.057-.972-.044-1.5-.207-1.85-.344a3.09 3.09 0 01-1.143-.746 3.09 3.09 0 01-.746-1.143c-.137-.35-.3-.878-.344-1.85C1.812 12.987 1.802 12.671 1.802 10c0-2.671.01-2.987.057-4.038.044-.972.207-1.5.344-1.85.181-.464.398-.795.746-1.143.348-.348.679-.565 1.143-.746.35-.137.878-.3 1.85-.344C7.013 1.812 7.329 1.802 10 1.802zm0 3.069A5.129 5.129 0 004.871 10 5.129 5.129 0 0010 15.129 5.129 5.129 0 0015.129 10 5.129 5.129 0 0010 4.871zm0 8.456A3.327 3.327 0 016.673 10 3.327 3.327 0 0110 6.673 3.327 3.327 0 0113.327 10 3.327 3.327 0 0110 13.327zm5.33-8.596a1.198 1.198 0 10.001 2.396 1.198 1.198 0 00-.001-2.396z" },
+    { key: "x", label: "X", icon: "M15.75 0h3.067l-6.7 7.657L20 20h-6.266l-4.906-6.41L3.219 20H.15l7.165-8.19L0 0h6.425l4.434 5.86L15.75 0zm-1.076 18.141h1.699L5.502 1.761H3.68L14.674 18.14z" },
+    { key: "youtube", label: "YouTube", icon: "M19.582 3.46A2.5 2.5 0 0017.82 1.7C16.264 1.286 10 1.286 10 1.286s-6.264 0-7.82.414A2.5 2.5 0 00.418 3.46 26.12 26.12 0 000 10a26.12 26.12 0 00.418 6.54 2.5 2.5 0 001.762 1.76c1.556.414 7.82.414 7.82.414s6.264 0 7.82-.414a2.5 2.5 0 001.762-1.76A26.12 26.12 0 0020 10a26.12 26.12 0 00-.418-6.54zM8 14V6l6 4-6 4z" },
+    { key: "tiktok", label: "TikTok", icon: "M14.5 0h-3v13.5a2.5 2.5 0 11-2.5-2.5c.277 0 .545.045.797.126V8.02A5.5 5.5 0 103.5 13.5V3h3c.69 2.044 2.613 3.5 4.9 3.5V3.5A2.5 2.5 0 0114.5 0z" },
+    { key: "snapchat", label: "Snapchat", icon: "M10 1.3c1.771 0 3.138 1.274 3.138 3.15v1.296c0 .57.201 1.045.612 1.454.285.284.587.42.964.42.183 0 .349-.03.483-.08.224-.09.396-.137.532-.137.27 0 .463.178.463.447 0 .212-.132.398-.385.551-.478.29-1.073.44-1.753.44-.149 0-.296-.008-.442-.024.35.711.805 1.31 1.366 1.796.68.586 1.47 1.006 2.37 1.258.296.083.438.249.438.503 0 .223-.123.39-.367.493-.824.348-1.65.532-2.48.552-.27 1.148-1.243 1.932-2.93 2.348-.52.127-1.027.193-1.52.193-.495 0-1.001-.066-1.521-.193-1.687-.416-2.66-1.2-2.93-2.348-.83-.02-1.657-.204-2.48-.552-.244-.103-.367-.27-.367-.493 0-.254.142-.42.438-.503.9-.252 1.69-.672 2.37-1.258.56-.486 1.016-1.085 1.366-1.796a4.2 4.2 0 01-.442.024c-.68 0-1.275-.15-1.753-.44-.253-.153-.385-.34-.385-.551 0-.269.193-.447.463-.447.136 0 .308.047.532.137.134.05.3.08.483.08.377 0 .679-.136.964-.42.41-.409.612-.884.612-1.454V4.45C6.862 2.574 8.229 1.3 10 1.3z" },
+    { key: "telegram", label: "Telegram", icon: "M19.944 2.043L16.88 17.74c-.23 1.11-.83 1.385-1.68.864l-4.64-3.42-2.24 2.154c-.247.247-.454.454-.93.454l.332-4.714 8.58-7.75c.373-.332-.08-.517-.58-.185l-10.61 6.68-4.57-1.426c-.995-.31-1.013-.995.207-1.473L18.94.532c.86-.31 1.61.185 1.334 1.51z" },
+    { key: "linkedin", label: "LinkedIn", icon: "M4.98 3.5C4.98 5.157 3.657 6.5 2 6.5S-.98 5.157-.98 3.5 0.343.5 2 .5s2.98 1.343 2.98 3zM.5 8h3V20h-3V8zm6 0h2.877v1.71h.041c.401-.76 1.381-1.56 2.844-1.56C15.304 8.15 16 10.154 16 12.77V20h-3v-6.419c0-1.531-.027-3.499-2.132-3.499-2.135 0-2.462 1.667-2.462 3.387V20h-3V8z" },
+    { key: "whatsapp", label: "WhatsApp", icon: "M17.472 2.523A9.84 9.84 0 0010.041 0C4.495 0 0 4.496 0 10.042a10.01 10.01 0 001.362 5.025L0 20l5.108-1.34a10.02 10.02 0 004.933 1.26h.004c5.546 0 10.042-4.496 10.042-10.042a9.96 9.96 0 00-2.615-7.355zM10.045 18.2h-.003a8.28 8.28 0 01-4.22-1.157l-.303-.18-3.032.795.81-2.955-.198-.304A8.25 8.25 0 011.8 10.042c0-4.547 3.698-8.245 8.245-8.245a8.23 8.23 0 015.846 2.42 8.2 8.2 0 012.408 5.84c0 4.548-3.698 8.243-8.254 8.243zM14.57 11.99c-.248-.124-1.467-.724-1.695-.806-.228-.083-.394-.124-.56.124-.166.248-.643.806-.788.972-.145.166-.29.186-.538.062-.248-.124-1.047-.386-1.994-1.23-.736-.657-1.233-1.468-1.378-1.717-.145-.248-.015-.382.109-.506.112-.111.248-.29.373-.435.124-.145.165-.248.248-.414.083-.166.041-.31-.021-.434-.062-.124-.56-1.35-.767-1.84-.201-.483-.405-.417-.56-.425l-.476-.008a.912.912 0 00-.662.31c-.228.248-.87.85-.87 2.07s.89 2.4 1.014 2.565c.124.166 1.75 2.67 4.24 3.742.592.255 1.053.407 1.414.521.594.188 1.134.162 1.561.098.476-.071 1.467-.6 1.674-1.18.207-.58.207-1.078.145-1.18-.062-.103-.228-.166-.476-.29z" },
+    { key: "github", label: "GitHub", icon: "M10 .2a10 10 0 00-3.162 19.49c.5.092.684-.217.684-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.37-1.34-3.37-1.34-.455-1.156-1.11-1.464-1.11-1.464-.908-.62.07-.607.07-.607 1.003.071 1.53 1.03 1.53 1.03.892 1.529 2.34 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.252-4.555-1.11-4.555-4.944 0-1.092.39-1.986 1.03-2.685-.103-.253-.446-1.271.098-2.65 0 0 .84-.269 2.75 1.025A9.56 9.56 0 0110 5.07c.85.004 1.706.114 2.505.334 1.909-1.294 2.748-1.025 2.748-1.025.546 1.379.203 2.397.1 2.65.64.699 1.028 1.593 1.028 2.685 0 3.844-2.338 4.688-4.566 4.936.36.31.68.92.68 1.855 0 1.338-.012 2.419-.012 2.748 0 .268.18.579.69.481A10 10 0 0010 .2z" }
+  ];
+
+  const icons = socialPlatforms.map((platform) => {
+    const url = String(socialLinks[platform.key] || "").trim();
+    const isDisabled = !url;
+    const attrs = isDisabled
+      ? 'href="#" class="social-icon disabled" aria-disabled="true" tabindex="-1"'
+      : `href="${escapeAttribute(url)}" target="_blank" class="social-icon"`;
+
+    return `<a ${attrs} aria-label="${escapeAttribute(
+      platform.label
+    )}"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="${platform.icon}"></path></svg></a>`;
+  });
+
+  socialBar.innerHTML = icons.join("");
+}
+
+function shortUrl(value) {
+  const url = String(value || "").replace(/^https?:\/\//i, "").replace(/\/$/, "");
+  return escapeHtml(url);
+}
+
+function normalizeWhatsapp(value) {
+  return String(value || "").replace(/[^0-9]/g, "");
 }
 
 function applyDefaultTheme(defaultTheme) {

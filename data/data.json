@@ -249,8 +249,20 @@
     "email": "abubesun@gmail.com",
     "phone": "+964 7905880479",
     "whatsapp": "+964 7817823680",
-    "linkedin": "",
-    "github": ""
+    "linkedin": "https://www.linkedin.com/in/a7med-h/",
+    "github": "",
+    "socialLinks": {
+      "facebook": "",
+      "instagram": "",
+      "x": "",
+      "youtube": "",
+      "tiktok": "",
+      "snapchat": "",
+      "telegram": "",
+      "linkedin": "https://www.linkedin.com/in/a7med-h/",
+      "whatsapp": "https://wa.me/9647817823680",
+      "github": ""
+    }
   },
   "settings": {
     "defaultTheme": "dark"
